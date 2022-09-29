@@ -1,5 +1,5 @@
 
-# HTML / CSS / JAVASCRIPT CHALLENGE 100
+# HTML / CSS / JAVASCRIPT CHALLENGE 50
 
 * *Date Created*: 27 Sep 2022
 * *Last Modification Date*: 
