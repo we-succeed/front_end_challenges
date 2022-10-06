@@ -1,15 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <script src="main.js" defer></script>
-  <link rel="stylesheet" href="style.css">
-  <title>Vanilla Zoo</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- <script src="classes.js" type="module"></script> -->
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Zoo Tycoon</title>
+  </head>
+  <body>
+    <main class="game">
+      <head>
+        <section class="controller">
+          <button class="controller_add_btn">ADD</button>
+          <button class="controller_remove_btn">REMOVE</button>
+        </section>
+        <div class="controller_container">
+          <img src="./images/animals/Cat.png" alt="Cat" class="animal cat1">
+          <div class="animal_detail">
+            <div class="animal_name_container">
+              <span class="animal_name_title">
+                Name:
+              </span>
+              <span class="animal_name">CAT</span>
+            </div>
+            <div class="animal_character">good</div>
+            <div class="animal_foodLevel">
+              <div class="gauge">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="controller_container">
+          <img src="./images/animals/Chicken.png" alt="Chicken" class="animal chicken">
+          <div class="animal_detail">
+            <div class="animal_name">first cat</div>
+            <div class="animal_character">good</div>
+            <div class="animal_character">good</div>
+          </div>
+        </div>
+        <div class="controller_container">
+          <img src="./images/animals/Dino.png" alt="Dino" class="animal dino1">
+          <div class="animal_detail">
+            <div class="animal_name">first cat</div>
+            <div class="animal_character">good</div>
+            <div class="animal_character">good</div>
+          </div>
+        </div>
+        <div class="controller_container">
+          <img src="./images/animals/Rabbit.png" alt="Rabbit" class="animal rabbit1">
+          <div class="animal_detail">
+            <div class="animal_name">first cat</div>
+            <div class="animal_character">good</div>
+            <div class="animal_character">good</div>
+          </div>
+        </div>
+        </section>
+      </head>
+      <!-- GAME PAGE -->
+      <section class="game_seciton"></section>
+    </main>
+  </body>
 </html>

@@ -9,8 +9,6 @@ This is mini project practicing OOP concept of JavaScript.<br />
 
 ## Resources
 Imgage : https://www.pngegg.com/ko/png-bfcwi
-homeBackgroundImage : https://www.teahub.io/down/ihwTwii_zoo-tycoon-wallpaper-in-zoo-tycoon-ultimate-animal/
-mainBackgroundImage: https://www.vecteezy.com/vector-art/3228448-different-outdoor-landscape-scenes-with-cartoon-character
 Image cutting tool : Photoshop
 
 ## Design
@@ -31,3 +29,11 @@ Image cutting tool : Photoshop
 5. feed animals if animal's foodLevel is below.. ?
   5-1. click feed on animal card OR `autoFeed` button on control section
 
+## module import vs require
+* Import => provided by ES6
+1. syntax = import moment from "moment";
+2. pros
+  2-1. readability with `import, from, export, default`
+  2-2. only import required parts which is good for memory
+* require => provided by Node.js
+1. syntax = const moment = require("moment");

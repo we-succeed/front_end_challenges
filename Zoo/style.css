@@ -6,5 +6,37 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: grey;
+  background-color: rgb(255, 255, 255);
+  width: 100vw;
+  height: 100vh;
+}
+/* MAIN */
+main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.controller_container {
+  position: relative;
+}
+.controller_container img.animal {
+  position: relative;
+}
+.controller_container .animal_detail {
+  position: absolute;
+  left: 4rem;
+  bottom: 5rem;
+}
+.controller_container .animal_detail .animal_foodLevel {
+  height: 2rem;
+  border: .2rem solid black;
+  width: 7rem;
+  position: relative;
+  margin-top: 1rem;
+}
+.controller_container .animal_detail .animal_foodLevel .gauge {
+  width: 50%;
+  height: 100%;
+  background-color: blue;
 }
