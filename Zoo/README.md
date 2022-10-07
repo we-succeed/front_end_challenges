@@ -37,3 +37,29 @@ Image cutting tool : Photoshop
   2-2. only import required parts which is good for memory
 * require => provided by Node.js
 1. syntax = const moment = require("moment");
+
+## child Class extends(inherit) parent Class
+* Must call super constructor in derived class before accessing 'this'
+```js
+  class Parent {
+    constructur(types) {
+      this.types = types
+    }
+  }
+
+  class Child extends Parent {
+    // INVALID
+    constructor(type) {
+      this.type = type
+      super();
+    }
+    // VALID
+    constructor(type) {
+      super();
+      this.type = type
+    }
+  }
+```
+
+## ES6 Class getter and setter
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
