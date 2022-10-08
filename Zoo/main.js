@@ -4,45 +4,21 @@ class Animal {
     this.type = type;
     this.foodType = foodType;
     this.swimmable = swim;
+    this.foodLevel = Math.floor(Math.random() * 100)
+    this.init();
+
   }
-  about() {
-    console.log(`Name: ${this.name}, Type: ${this.type}, Sound: ${this.sound}`);
+  init() {
+    console.log(`${this.name} in ${this.type} added and it's foodType is ${this.foodType}`, `FoodLevel: ${this.foodLevel}`);
   }
+  
 }
-class Herbivore extends Animal {
-
-}
-
-class Omnivore extends Animal {
-
-}
-
-class Carnivore extends Animal {
-
-}
-
-// class Aquatic extends Animal {
-//   constructor(name, type, foodType) {
-//     super(name, type);
-//     console.log("FT", foodType);
-//     this.foodType = foodType;
-//     this.init();
-//   }
-//   init() {
-//     console.log(`${this.name} in ${this.type} added and it's foodType is ${this.foodType}`);
-//   }
-// }
-
 class Mammal extends Animal {
   // constructor(name, type, foodType, swim) {
-    // super();
-    // this.foodType = foodType;
-    // this.swim = swim;
-    // this.init();
+  //   super(name, type, foodType, swim);
   // }
-  init() {
-    console.log(`${this.name} in ${this.type} added and it's foodType is ${this.foodType}`);
-  }
+
+  
 }
 
 class Bird extends Animal {
@@ -72,6 +48,21 @@ const generateButton = document.querySelector(".button_generate");
 
 const addSelector = document.querySelector(".animal_lists");
 const animalName = document.querySelector(".new_animal_name");
+
+/** TYPES */
+const types = {
+  Mammal: ["Cat", "Lion", "Fox", "Rabbit", "Sheep"],
+  Bird: ["Chicken", "Penguin", "Duck"],
+  Raptile: ["Dino"]
+};
+const foodTypes = {
+  Omnivore : ["Cat", "Duck"],
+  Herbivore : ["Chicken", "Rabbit", "Sheep"],
+  Carnivore : ["Dino", "Fox", "Lion", "Penguin"]
+}
+const swimmable = ["cat", "Lion", "Fox", "Penguin", "Duck"];
+
+
 /** FUNCTIONS */
 let toggleAddForm = false;
 let toggleRemoveForm = false;
@@ -83,30 +74,12 @@ function toggleForm(e) {
 
 function determineFoodType(type) {
   let foodType;
-  switch (type) {
-    case "Cat" || "Duck":
-      foodType = "Omnivore";
-      break;
-    case "Chicken" || "Rabbit" || "Sheep":
-      foodType = "Herbivore";
-      break;
-    case "Dino" || "Fox" || "Lion" || "Penguin":
-      foodType = "Carnivore";
-      break;
-    default:
-      return;
-  }
+
+  if (foodTypes.Omnivore.includes(type)) foodType = "Omnivore";
+  if (foodTypes.Herbivore.includes(type)) foodType = "Herbivore";
+  if (foodTypes.Carnivore.includes(type)) foodType = "Carnivore";
   return foodType;
 }
-/** TYPES */
-const types = {
-  Mammal: ["Cat", "Lion", "Fox", "Rabbit", "Sheep"],
-  Bird: ["Chicken", "Penguin", "Duck"],
-  Raptile: ["Dino"]
-};
-
-const swimmable = ["cat", "Lion", "Fox", "Penguin", "Duck"];
-
 
 /** GENERATE CLASS */
 function generateClass(name, type, foodType) {
@@ -120,6 +93,13 @@ function generateClass(name, type, foodType) {
   return newAnimal;
 }
 
+/** CREATE HTML ELEMENTS */
+function createElement(animal) {
+  // distructuring
+  const {name, type, swimmable, foodType, foodLevel} = animal;
+  console.log("HEY", name, type, swimmable, foodType, foodLevel)
+}
+
 /** Create Animal Component */
 function generateAnimal(e) {
   e.preventDefault();
@@ -128,7 +108,8 @@ function generateAnimal(e) {
   const foodType = determineFoodType(type);
   if (foodType) {
     let newAnimal = generateClass(name, type, foodType);
-    console.log("NEWANIMAL", newAnimal)
+    /** APPEND CHILD */
+    createElement(newAnimal)
   }
 
 }
