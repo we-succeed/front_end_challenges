@@ -18,9 +18,8 @@ body {
   padding: 2rem 0;
 }
 
-.add_container,
-.remove_container {
-
+.add_container {
+  text-align: center;
 }
 
 .animal_lists_container.add,
@@ -43,7 +42,7 @@ main {
 }
 /* ANIMALS */
 .animals_container {
-  /* position: relative; */
+  position: relative;
 }
 .animals_container .animal {
   position: relative;
@@ -59,7 +58,6 @@ main {
   bottom: 0;
   left: 3.5rem;
   display: flex;
-  /* justify-content: space-between; */
 }
 
 .animals_container .animal .animal_controller {
@@ -91,4 +89,5 @@ main {
 .animals_container .animal_detail .animal_foodLevel .gauge {
   height: 100%;
   /* background-color: blue; */
+  transition: width .5s;
 }

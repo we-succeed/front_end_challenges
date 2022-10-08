@@ -24,10 +24,10 @@ class Animal {
 
   updateStatus() {
     const interval = setInterval(() => {
-      this.foodLevel -= 1;
+      this.foodLevel -= 0.5;
       if (this.foodLevel <= 0) {
         this.dead();
-        clearInterval(interval)
+        clearInterval(interval);
       }
       if (this.foodLevel >= 50) this.color = "blue";
       if (this.foodLevel < 50) this.color = "orange";
@@ -42,7 +42,7 @@ class Animal {
 
   dead() {
     this.#dead = true;
-    console.log(`${this.name} is dead`)
+    console.log(`${this.name} is dead`);
   }
 
 }
@@ -57,10 +57,7 @@ class Raptile extends Animal { }
 
 /** Get main element */
 const main = document.querySelector("main");
-const controllerButtons = {
-  add: document.querySelector(".controller_add_btn"),
-  revmoe: document.querySelector(".controller_remove_btn")
-};
+const addButton = document.querySelector(".controller_add_btn");
 
 const toggleElements = {
   add: document.querySelector(".animal_lists_container.add"),
@@ -171,13 +168,13 @@ function createElement(animal) {
   const gauges = animalContainer.getElementsByClassName("gauge");
   const newAnimalGauge = gauges[gauges.length - 1];
   const interval = setInterval(() => {
-    if (animal.foodLevel <= 0) clearInterval(interval)
+    if (animal.foodLevel <= 0) clearInterval(interval);
     newAnimalGauge.style.width = `${animal.foodLevel}%`;
-    if (newAnimalGauge.style.backgroundColor !== animal.color)     newAnimalGauge.style.backgroundColor = animal.color;
+    if (newAnimalGauge.style.backgroundColor !== animal.color) newAnimalGauge.style.backgroundColor = animal.color;
     console.log("COLOR", newAnimalGauge.style.backgroundColor);
   }, 1000);
   const feedBtns = animalContainer.getElementsByClassName("animal_feed");
-  feedBtns[feedBtns.length - 1].addEventListener("click", () => animal.feed())
+  feedBtns[feedBtns.length - 1].addEventListener("click", () => animal.feed());
 
 }
 
@@ -200,7 +197,7 @@ function generateAnimal(e) {
 /**************** Remove Animal Component *******************/
 
 /** EVENTLISTENERS */
-Object.values(controllerButtons).forEach(button => button.addEventListener("click", toggleForm));
+addButton.addEventListener("click", toggleForm);
 
 generateButton.addEventListener("click", generateAnimal);
 
