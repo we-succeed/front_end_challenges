@@ -1,37 +1,59 @@
 class Animal {
+  #dead;
   constructor(name, type, foodType, swim, species) {
     this.name = name;
     this.type = type;
     this.foodType = foodType;
     this.swimmable = swim;
-    this.species = species
-    this.foodLevel = Math.floor(Math.random() * 100);
+    this.species = species;
+    this.foodLevel = this.setFoodLevel();
+    this.color = "blue";
+    this.#dead = false;
     this.init();
-
   }
+
   init() {
     console.log(`${this.name} in ${this.type} added and it's foodType is ${this.foodType}`, `FoodLevel: ${this.foodLevel}`);
+    this.updateStatus();
+  }
+
+  setFoodLevel() {
+    let initialLevel = Math.floor(Math.random() * 30) + 30; // min 30% to max 60%
+    return initialLevel;
+  }
+
+  updateStatus() {
+    const interval = setInterval(() => {
+      this.foodLevel -= 1;
+      if (this.foodLevel <= 0) {
+        this.dead();
+        clearInterval(interval)
+      }
+      if (this.foodLevel >= 50) this.color = "blue";
+      if (this.foodLevel < 50) this.color = "orange";
+      if (this.foodLevel < 25) this.color = "red";
+    }, 500);
+  }
+
+  feed() {
+    console.log("FEED");
+    if (this.foodLevel < 50) this.foodLevel += 30;
+  }
+
+  dead() {
+    this.#dead = true;
+    console.log(`${this.name} is dead`)
   }
 
 }
-class Mammal extends Animal {
-  // constructor(name, type, foodType, swim) {
-  //   super(name, type, foodType, swim);
-  // }
+class Mammal extends Animal { }
+
+class Bird extends Animal { }
+
+class Raptile extends Animal { }
 
 
-}
-
-class Bird extends Animal {
-
-}
-
-class Raptile extends Animal {
-
-}
-
-
-/** GET ELEMENTS */
+/**************** GET ELEMENTS *******************/
 
 /** Get main element */
 const main = document.querySelector("main");
@@ -49,10 +71,15 @@ const generateButton = document.querySelector(".button_generate");
 
 const addSelector = document.querySelector(".animal_lists");
 const animalName = document.querySelector(".new_animal_name");
-
+/** PARENT */
 const animalContainer = document.querySelector(".animals_container");
 
-/** TYPES */
+/** GAGUE */
+const gauge = document.querySelector(".gauge");
+
+
+
+/**************** TYPES *******************/
 const types = {
   Mammal: ["Cat", "Lion", "Fox", "Rabbit", "Sheep"],
   Bird: ["Chicken", "Penguin", "Duck"],
@@ -66,7 +93,7 @@ const foodTypes = {
 const swimmable = ["cat", "Lion", "Fox", "Penguin", "Duck"];
 
 
-/** FUNCTIONS */
+/**************** FUNCTIONS *******************/
 let toggleAddForm = false;
 let toggleRemoveForm = false;
 
@@ -99,8 +126,8 @@ function generateClass(name, type, foodType) {
 /** CREATE HTML ELEMENTS */
 function createElement(animal) {
   // distructuring
-  const { name, type, swimmable, foodType, foodLevel, species } = animal;
-  console.log("HEY", name, type, swimmable, foodType, foodLevel, species);
+  const { name, type, swimmable, foodType, foodLevel, species, color } = animal;
+  console.log("HEY", name, type, swimmable, foodType, foodLevel, species, color);
   // parent = class("animals_container")
   /** CHILD */
   const child = document.createElement("div");
@@ -120,8 +147,8 @@ function createElement(animal) {
       </div>
       <div class="animal_character_container">
         <div class="animal_character">
-          <span class="animal_character_title">Character:</span>
-          good
+          <span class="animal_character_title">Swimmable:</span>
+          ${swimmable}
         </div>
       </div>
       <div for="animal_foodLevel_container">
@@ -129,14 +156,29 @@ function createElement(animal) {
           FoodLevel
         </span>
         <div class="animal_foodLevel">
-          <div class="gauge" style="width: ${foodLevel}%">
+          <div class="gauge" style="width: ${foodLevel}%; background-color: ${color}">
           </div>
         </div>
       </div>
     </div>
+    <div class="animal_controller">
+      <button class="animal_feed">feed</button>
+      <button class="animal_remove">remove</button>
+    </div>
   </div>
   `;
   animalContainer.appendChild(child);
+  const gauges = animalContainer.getElementsByClassName("gauge");
+  const newAnimalGauge = gauges[gauges.length - 1];
+  const interval = setInterval(() => {
+    if (animal.foodLevel <= 0) clearInterval(interval)
+    newAnimalGauge.style.width = `${animal.foodLevel}%`;
+    if (newAnimalGauge.style.backgroundColor !== animal.color)     newAnimalGauge.style.backgroundColor = animal.color;
+    console.log("COLOR", newAnimalGauge.style.backgroundColor);
+  }, 1000);
+  const feedBtns = animalContainer.getElementsByClassName("animal_feed");
+  feedBtns[feedBtns.length - 1].addEventListener("click", () => animal.feed())
+
 }
 
 /** Create Animal Component */
@@ -147,13 +189,15 @@ function generateAnimal(e) {
   const foodType = determineFoodType(type);
   if (foodType) {
     let newAnimal = generateClass(name, type, foodType);
+
+    // newAnimal.decreaseFoodLevel()
     /** APPEND CHILD */
     createElement(newAnimal);
   }
 
 }
 
-/** Remove Animal Component */
+/**************** Remove Animal Component *******************/
 
 /** EVENTLISTENERS */
 Object.values(controllerButtons).forEach(button => button.addEventListener("click", toggleForm));

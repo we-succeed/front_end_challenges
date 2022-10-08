@@ -3,9 +3,8 @@
 This is mini project practicing OOP concept of JavaScript.<br />
 ## Plan
 * ~~Scrub image resources if animals~~
-* Design app workflows
+* ~~Design app workflows~~
 * Understanding OOP in JS
-* Start coding
 
 ## Resources
 Imgage : https://www.pngegg.com/ko/png-bfcwi
@@ -63,6 +62,9 @@ Image cutting tool : Photoshop
 
 ## ES6 Class getter and setter
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
+* private
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
+
 
 ### Animal types
 * Mammal : Cat, Fox, Lion, Rabbit, Sheep
@@ -73,3 +75,4 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
 * Herbivore
 * Carnivore
 * Omnivore
+

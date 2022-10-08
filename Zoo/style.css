@@ -47,15 +47,35 @@ main {
 }
 .animals_container .animal {
   position: relative;
+  display: flex;
+  flex-direction: row;
 }
-.animals_container img {
+.animals_container .animal img {
   position: relative;
 }
+
+.animals_container .animal .animal_controller {
+  position: absolute;
+  bottom: 0;
+  left: 3.5rem;
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.animals_container .animal .animal_controller {
+
+}
+
 .animals_container .animal .animal_detail {
   position: absolute;
   left: 4rem;
   bottom: 3.5rem;
 }
+
+.animals_container .animal .animal_detail {
+  text-align: center;
+}
+
 
 .animals_container .animal_detail .animal_foodLevel_container {
   padding-top: 40px;
@@ -70,5 +90,5 @@ main {
 }
 .animals_container .animal_detail .animal_foodLevel .gauge {
   height: 100%;
-  background-color: blue;
+  /* background-color: blue; */
 }
