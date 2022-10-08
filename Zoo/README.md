@@ -63,3 +63,13 @@ Image cutting tool : Photoshop
 
 ## ES6 Class getter and setter
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
+
+### Animal types
+* Mammal : Cat, Fox, Lion, Rabbit, Sheep
+* Bird : Chicken, Penguin, Duck
+* Reptile : Dino
+
+### FoodType
+* Herbivore
+* Carnivore
+* Omnivore

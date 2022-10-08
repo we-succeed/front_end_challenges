@@ -14,7 +14,8 @@ body {
 .controller {
   display: flex;
   justify-content: center;
-  background-color: red;
+  background-color: grey;
+  padding: 2rem 0;
 }
 
 .add_container,
