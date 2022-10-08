@@ -43,19 +43,21 @@ main {
 }
 /* ANIMALS */
 .animals_container {
+  /* position: relative; */
+}
+.animals_container .animal {
   position: relative;
 }
-.animals_container img.animal {
+.animals_container img {
   position: relative;
 }
-.animals_container .animal_detail {
+.animals_container .animal .animal_detail {
   position: absolute;
   left: 4rem;
-  bottom: 5rem;
+  bottom: 3.5rem;
 }
 
 .animals_container .animal_detail .animal_foodLevel_container {
-  /* margin-bottom: 10px; */
   padding-top: 40px;
 }
 
@@ -67,7 +69,6 @@ main {
   margin-top: 1rem;
 }
 .animals_container .animal_detail .animal_foodLevel .gauge {
-  width: 50%;
   height: 100%;
   background-color: blue;
 }
