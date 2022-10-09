@@ -46,20 +46,28 @@ main {
 }
 .animals_container .animal {
   position: relative;
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
 }
 .animals_container .animal img {
   position: relative;
 }
-
+.animals_container .animal.Lion img {
+  padding-bottom: 1rem;
+  /* padding-right: 10px; */
+}
 .animals_container .animal .animal_controller {
   position: absolute;
   bottom: 0;
   left: 3.5rem;
   display: flex;
 }
-
+.animals_container .animal.Lion .animal_detail {
+  left: 5rem;
+}
+.animals_container .animal.Lion .animal_controller {
+  left: 4.5rem;
+}
 .animals_container .animal .animal_controller {
 
 }

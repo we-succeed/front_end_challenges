@@ -1,3 +1,21 @@
+class Zoo {
+  constructor() {
+    this.animals = {};
+  }
+  add(type, name) {
+    // const type = animal.type
+    if (!this.animals[type]) this.animals[type] = {};
+    this.animals[type][name] = true;
+  }
+  remove(type, name) {
+    delete this.animals[type][name];
+  }
+  unique(type, name) {
+    if (this.animals?.[type]?.[name]) return false;
+    return true;
+  }
+}
+
 class Animal {
   #dead;
   constructor(name, type, foodType, swim, species) {
@@ -52,7 +70,7 @@ class Bird extends Animal { }
 
 class Raptile extends Animal { }
 
-
+const zoo = new Zoo();
 /**************** GET ELEMENTS *******************/
 
 /** Get main element */
@@ -73,7 +91,7 @@ const animalContainer = document.querySelector(".animals_container");
 
 /** GAGUE */
 const gauge = document.querySelector(".gauge");
-
+// const animalElements = animalContainer.getElementsByClassName("animal");
 
 
 /**************** TYPES *******************/
@@ -110,6 +128,9 @@ function determineFoodType(type) {
 
 /** GENERATE CLASS */
 function generateClass(name, type, foodType) {
+  /** CHECK UNIQUE */
+  const unique = zoo.unique(type, name);
+  if (!unique) return false;
   /** Type Groups */
   const canSwim = swimmable.includes(type) ? "Yes" : "No";
 
@@ -117,7 +138,30 @@ function generateClass(name, type, foodType) {
   if (types.Mammal.includes(type)) newAnimal = new Mammal(name, type, foodType, canSwim, "Mammal");
   if (types.Bird.includes(type)) newAnimal = new Bird(name, type, foodType, canSwim, "Bird");
   if (types.Raptile.includes(type)) newAnimal = new Raptile(name, type, foodType, canSwim, "Raptile");
+
+  zoo.add(type, name);
   return newAnimal;
+}
+
+/** Create Animal Component */
+function generateAnimal(e) {
+  e.preventDefault();
+  const name = animalName.value;
+  const type = addSelector.value;
+  const foodType = determineFoodType(type);
+  if (foodType) {
+    let newAnimal = generateClass(name, type, foodType);
+    if (!newAnimal) return;
+    /** APPEND CHILD */
+    createElement(newAnimal);
+  }
+}
+
+/** Remove Animal Component */
+function removeAnimal(e, type, name, parent, animal) {
+  console.log(parent);
+  zoo.remove(type, name);
+  parent.removeChild(animal);
 }
 
 /** CREATE HTML ELEMENTS */
@@ -128,9 +172,8 @@ function createElement(animal) {
   // parent = class("animals_container")
   /** CHILD */
   const child = document.createElement("div");
-  child.setAttribute("class", name);
+  child.setAttribute("class", `animal ${type} ${type}${name}`);
   child.innerHTML = `
-  <div class="animal ${type}">
     <img src="./images/animals/${type}.png" alt=${type} class="animal_img">
     <div class="animal_detail">
       <div class="animal_species">
@@ -162,7 +205,6 @@ function createElement(animal) {
       <button class="animal_feed">feed</button>
       <button class="animal_remove">remove</button>
     </div>
-  </div>
   `;
   animalContainer.appendChild(child);
   const gauges = animalContainer.getElementsByClassName("gauge");
@@ -171,28 +213,19 @@ function createElement(animal) {
     if (animal.foodLevel <= 0) clearInterval(interval);
     newAnimalGauge.style.width = `${animal.foodLevel}%`;
     if (newAnimalGauge.style.backgroundColor !== animal.color) newAnimalGauge.style.backgroundColor = animal.color;
-    console.log("COLOR", newAnimalGauge.style.backgroundColor);
   }, 1000);
-  const feedBtns = animalContainer.getElementsByClassName("animal_feed");
-  feedBtns[feedBtns.length - 1].addEventListener("click", () => animal.feed());
 
+  const feedBtns = child.querySelector(".animal_feed");
+  feedBtns.addEventListener("click", () => animal.feed());
+  // const removeBtns = animalContainer.
+  // const latestAnimal = animalElements[animalElements.length - 1];
+  const childElement = animalContainer.querySelector(`.${type}${name}`)
+
+  // const thisChild = animalElements
+  const animalElement = child.querySelector(".animal_remove");
+  animalElement.addEventListener("click", (e) => removeAnimal(e, type, name, animalContainer, childElement));
 }
 
-/** Create Animal Component */
-function generateAnimal(e) {
-  e.preventDefault();
-  const name = animalName.value;
-  const type = addSelector.value;
-  const foodType = determineFoodType(type);
-  if (foodType) {
-    let newAnimal = generateClass(name, type, foodType);
-
-    // newAnimal.decreaseFoodLevel()
-    /** APPEND CHILD */
-    createElement(newAnimal);
-  }
-
-}
 
 /**************** Remove Animal Component *******************/
 
