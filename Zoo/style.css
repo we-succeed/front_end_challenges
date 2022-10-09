@@ -22,18 +22,6 @@ body {
   text-align: center;
 }
 
-.animal_lists_container.add,
-.animal_lists_container.remove {
-  display: none;
-}
-
-
-.animal_lists_container.add.show,
-.animal_lists_container.remove.show {
-  display: block;
-}
-
-
 /* MAIN */
 main {
   width: 100%;
@@ -46,15 +34,36 @@ main {
 }
 .animals_container .animal {
   position: relative;
-  /* display: flex; */
-  /* flex-direction: row; */
+  display: inline;
+  transition: all 2s;
 }
+.animals_container .animal.dead {
+  opacity: 0.5;
+}
+
 .animals_container .animal img {
   position: relative;
 }
 .animals_container .animal.Lion img {
-  padding-bottom: 1rem;
-  /* padding-right: 10px; */
+  /* padding-bottom: 1rem; */
+}
+.animals_container .animal.Lion .animal_detail {
+  left: 4.8rem;
+  bottom: 2.5rem;
+}
+.animals_container .animal.Lion .animal_controller {
+  left: 4.5rem;
+  bottom: -1rem;
+}
+.animals_container .animal.Dino img {
+  /* padding-top: .5rem; */
+}
+.animals_container .animal.Dino .animal_detail {
+  left: 4.5rem;
+  bottom: 4rem;
+}
+.animals_container .animal.Dino .animal_controller {
+  left: 4.5rem;
 }
 .animals_container .animal .animal_controller {
   position: absolute;
@@ -62,14 +71,15 @@ main {
   left: 3.5rem;
   display: flex;
 }
-.animals_container .animal.Lion .animal_detail {
-  left: 5rem;
+.animals_container .animal .animal_controller .animal_feed {
+  background-color: green; 
 }
-.animals_container .animal.Lion .animal_controller {
-  left: 4.5rem;
+.animals_container .animal.dead .animal_controller .animal_feed {
+  opacity: .1;
+  background-color: black;
 }
-.animals_container .animal .animal_controller {
-
+.animals_container .animal .animal_controller .animal_remove {
+  background-color: red;
 }
 
 .animals_container .animal .animal_detail {
@@ -96,6 +106,5 @@ main {
 }
 .animals_container .animal_detail .animal_foodLevel .gauge {
   height: 100%;
-  /* background-color: blue; */
   transition: width .5s;
 }

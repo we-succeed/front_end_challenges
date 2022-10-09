@@ -10,9 +10,22 @@ class Zoo {
   remove(type, name) {
     delete this.animals[type][name];
   }
-  unique(type, name) {
-    if (this.animals?.[type]?.[name]) return false;
+  checkNumber(type) {
+    if (this.animals[type]) {
+      let count = Object.keys(this.animals[type]).length;
+      if (count >= 10) return false;
+    }
     return true;
+  }
+  unique(type, name) {
+    const hasCapacity = this.checkNumber(type);
+    if (hasCapacity) {
+      if (this.animals?.[type]?.[name]) {
+        return false;
+      }
+      return true;
+    }
+    return false;
   }
 }
 
@@ -24,7 +37,7 @@ class Animal {
     this.foodType = foodType;
     this.swimmable = swim;
     this.species = species;
-    this.foodLevel = this.setFoodLevel();
+    this.foodLevel = Math.floor(Math.random() * 30) + 30;
     this.color = "blue";
     this.#dead = false;
     this.init();
@@ -42,9 +55,10 @@ class Animal {
 
   updateStatus() {
     const interval = setInterval(() => {
-      this.foodLevel -= 0.5;
+      this.foodLevel -= 2;
       if (this.foodLevel <= 0) {
         this.dead();
+        this.foodLevel = 0;
         clearInterval(interval);
       }
       if (this.foodLevel >= 50) this.color = "blue";
@@ -54,7 +68,6 @@ class Animal {
   }
 
   feed() {
-    console.log("FEED");
     if (this.foodLevel < 50) this.foodLevel += 30;
   }
 
@@ -75,7 +88,6 @@ const zoo = new Zoo();
 
 /** Get main element */
 const main = document.querySelector("main");
-const addButton = document.querySelector(".controller_add_btn");
 
 const toggleElements = {
   add: document.querySelector(".animal_lists_container.add"),
@@ -109,13 +121,6 @@ const swimmable = ["cat", "Lion", "Fox", "Penguin", "Duck"];
 
 
 /**************** FUNCTIONS *******************/
-let toggleAddForm = false;
-let toggleRemoveForm = false;
-
-function toggleForm(e) {
-  const value = e.target.textContent;
-  toggleElements[value].classList.add("show");
-}
 
 function determineFoodType(type) {
   let foodType;
@@ -159,7 +164,6 @@ function generateAnimal(e) {
 
 /** Remove Animal Component */
 function removeAnimal(e, type, name, parent, animal) {
-  console.log(parent);
   zoo.remove(type, name);
   parent.removeChild(animal);
 }
@@ -168,8 +172,6 @@ function removeAnimal(e, type, name, parent, animal) {
 function createElement(animal) {
   // distructuring
   const { name, type, swimmable, foodType, foodLevel, species, color } = animal;
-  console.log("HEY", name, type, swimmable, foodType, foodLevel, species, color);
-  // parent = class("animals_container")
   /** CHILD */
   const child = document.createElement("div");
   child.setAttribute("class", `animal ${type} ${type}${name}`);
@@ -208,21 +210,22 @@ function createElement(animal) {
   `;
   animalContainer.appendChild(child);
   const gauges = animalContainer.getElementsByClassName("gauge");
-  const newAnimalGauge = gauges[gauges.length - 1];
-  const interval = setInterval(() => {
-    if (animal.foodLevel <= 0) clearInterval(interval);
-    newAnimalGauge.style.width = `${animal.foodLevel}%`;
-    if (newAnimalGauge.style.backgroundColor !== animal.color) newAnimalGauge.style.backgroundColor = animal.color;
-  }, 1000);
+  const childElement = animalContainer.querySelector(`.${type}${name}`);
+  const animalElement = child.querySelector(".animal_remove");
 
   const feedBtns = child.querySelector(".animal_feed");
-  feedBtns.addEventListener("click", () => animal.feed());
-  // const removeBtns = animalContainer.
-  // const latestAnimal = animalElements[animalElements.length - 1];
-  const childElement = animalContainer.querySelector(`.${type}${name}`)
+  const newAnimalGauge = gauges[gauges.length - 1];
+  const interval = setInterval(() => {
+    newAnimalGauge.style.width = `${animal.foodLevel}%`;
+    if (newAnimalGauge.style.backgroundColor !== animal.color) newAnimalGauge.style.backgroundColor = animal.color;
+    if (animal.foodLevel === 0) {
+      child.classList.add("dead");
+      clearInterval(interval)
+    };
+  }, 1000);
 
-  // const thisChild = animalElements
-  const animalElement = child.querySelector(".animal_remove");
+  feedBtns.addEventListener("click", () => animal.feed());
+
   animalElement.addEventListener("click", (e) => removeAnimal(e, type, name, animalContainer, childElement));
 }
 
@@ -230,8 +233,5 @@ function createElement(animal) {
 /**************** Remove Animal Component *******************/
 
 /** EVENTLISTENERS */
-addButton.addEventListener("click", toggleForm);
 
 generateButton.addEventListener("click", generateAnimal);
-
-addSelector.addEventListener("change", (e) => { console.log(e.target.value); });
