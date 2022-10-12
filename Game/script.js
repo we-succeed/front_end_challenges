@@ -40,7 +40,7 @@ var blocks = setInterval(function(){
         var blockLastTop = parseInt(window.getComputedStyle(blockLast).getPropertyValue("top"));
         var holeLastTop = parseInt(window.getComputedStyle(holeLast).getPropertyValue("top"));
     }
-    if(blockLastTop<400||counter==0){
+    if(blockLastTop<390||counter==0){
         var block = document.createElement("div");
         var hole = document.createElement("div");
         block.setAttribute("class", "block");
@@ -62,7 +62,6 @@ var blocks = setInterval(function(){
     if(characterTop <= 0){
         alert("Game over. Score: "+(counter-9));
         clearInterval(blocks);
-        location.reload();
     }
     for(var i = 0; i < currentBlocks.length;i++){
         let current = currentBlocks[i];
@@ -72,7 +71,7 @@ var blocks = setInterval(function(){
         let iholeLeft = parseFloat(window.getComputedStyle(ihole).getPropertyValue("left"));
         iblock.style.top = iblockTop - 0.5 + "px";
         ihole.style.top = iblockTop - 0.5 + "px";
-        if(iblockTop < -20){
+        if(iblockTop < 0){
             currentBlocks.shift();
             iblock.remove();
             ihole.remove();
@@ -92,3 +91,9 @@ var blocks = setInterval(function(){
         character.style.top = characterTop - 0.5 + "px";
     }
 },1);
+
+const refreshButton = document.querySelector('.reset');
+const refreshPage = () => {
+location.reload();
+}
+refreshButton.addEventListener('click', refreshPage)
