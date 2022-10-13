@@ -114,8 +114,6 @@ const animalContainer = document.querySelector(".animals_container");
 
 /** GAGUE */
 const gauge = document.querySelector(".gauge");
-// const animalElements = animalContainer.getElementsByClassName("animal");
-
 
 /**************** TYPES *******************/
 const types = {
@@ -171,6 +169,8 @@ function generateAnimal(e) {
     /** APPEND CHILD */
     createElement(newAnimal);
   }
+  // reset input
+  animalName.value = "";
 }
 
 /** Remove Animal Component */
@@ -219,13 +219,13 @@ function createElement(animal) {
       <button class="animal_remove">remove</button>
     </div>
   `;
-  animalContainer.appendChild(child);
+  animalContainer.prepend(child);
   const gauges = animalContainer.getElementsByClassName("gauge");
   const childElement = animalContainer.querySelector(`.${type}${name}`);
   const animalElement = child.querySelector(".animal_remove");
 
   const feedBtns = child.querySelector(".animal_feed");
-  const newAnimalGauge = gauges[gauges.length - 1];
+  const newAnimalGauge = gauges[0];
   const interval = setInterval(() => {
     newAnimalGauge.style.width = `${animal.foodLevel}%`;
     if (newAnimalGauge.style.backgroundColor !== animal.color) newAnimalGauge.style.backgroundColor = animal.color;

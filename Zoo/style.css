@@ -6,15 +6,16 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(235, 247, 238);
   width: 100vw;
   height: 100vh;
 }
 /* SECTION in HEAD */
 .controller {
+  background-image: url(./images/header_bg.jpeg);
+  background-size: contain;
   display: flex;
   justify-content: center;
-  background-color: grey;
   padding: 2rem 0;
 }
 
@@ -37,16 +38,11 @@ main {
   display: inline;
   transition: all 2s;
 }
-.animals_container .animal.dead {
-  opacity: 0.5;
-}
 
 .animals_container .animal img {
   position: relative;
 }
-.animals_container .animal.Lion img {
-  /* padding-bottom: 1rem; */
-}
+
 .animals_container .animal.Lion .animal_detail {
   left: 4.8rem;
   bottom: 2.5rem;
@@ -70,13 +66,13 @@ main {
   bottom: 0;
   left: 3.5rem;
   display: flex;
+  justify-content: center;
 }
 .animals_container .animal .animal_controller .animal_feed {
   background-color: green; 
 }
 .animals_container .animal.dead .animal_controller .animal_feed {
-  opacity: .1;
-  background-color: black;
+  opacity: .5;
 }
 .animals_container .animal .animal_controller .animal_remove {
   background-color: red;
