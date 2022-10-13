@@ -76,3 +76,8 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Privat
 * Carnivore
 * Omnivore
 
+## Process
+1. html structuring
+2. css to make animal image and details inside image
+3. javascript
+  3-1. 

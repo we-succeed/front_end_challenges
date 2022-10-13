@@ -84,6 +84,17 @@ class Bird extends Animal { }
 class Raptile extends Animal { }
 
 const zoo = new Zoo();
+/**************** GENERATE OPTIONS *******************/
+
+const select = document.querySelector("select");
+const animalList = ["Cat", "Duck", "Dino", "Fox", "Lion", "Penguin", "Sheep"];
+animalList.map(animal => {
+  const option = document.createElement("option");
+  option.setAttribute("value", animal);
+  option.textContent = animal;
+  select.appendChild(option);
+});
+
 /**************** GET ELEMENTS *******************/
 
 /** Get main element */
@@ -220,7 +231,7 @@ function createElement(animal) {
     if (newAnimalGauge.style.backgroundColor !== animal.color) newAnimalGauge.style.backgroundColor = animal.color;
     if (animal.foodLevel === 0) {
       child.classList.add("dead");
-      clearInterval(interval)
+      clearInterval(interval);
     };
   }, 1000);
 
