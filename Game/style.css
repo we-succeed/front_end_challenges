@@ -1,0 +1,55 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Itim';
+    background-color: black;
+    text-align: center;
+}
+h1{
+    color: orange;
+    font-size: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+#game{
+    width: 400px;
+    height: 500px;
+    border: 2px solid purple;
+    margin: auto;
+}
+#character{
+    width: 20px;
+    height: 20px;
+    background-color: orange;
+    border-radius: 50%;
+    position: relative;
+    top: 440px;
+    left: 190px;
+    z-index: 100000;
+}
+.reset{
+    color: white;
+    margin-top: 20px;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: red;
+}
+.block{
+    width: 400px;
+    height: 20px;
+    background-color: purple; 
+    position: relative;
+    top: 100px;
+    margin-top: -20px;
+}
+.hole{
+    width: 40px;
+    height: 20px;
+    background-color: black;
+    position: relative;
+    top: 100px;
+    margin-top: -20px;
+}

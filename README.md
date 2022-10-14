@@ -8,8 +8,14 @@
 ## Authors
 
 * [HanaPark](hana.park88@hotmail.com) - *(contributor)*
+* [mikyYun]() - *(contributor)*
+* [mayfly950]() - *(contributor)*
+* [Aleumkim]() - *(contributor)*
 
 
 
 ## List
 1. Calculator- created by [@smilecana](https://github.com/smilecana)
+2. Zoo - created by [@mikyYun](https://github.com/mikyYun)
+3. Game - created by [@mayfly950](https://github.com/mayfly950)
+4. TodoList - created by [@Aleumkim](https://github.com/Aleumkim)

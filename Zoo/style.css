@@ -1,0 +1,106 @@
+:root,
+html,
+body {
+  font-size: 15px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(235, 247, 238);
+  width: 100vw;
+  height: 100vh;
+}
+/* SECTION in HEAD */
+.controller {
+  background-image: url(./images/header_bg.jpeg);
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.add_container {
+  text-align: center;
+}
+
+/* MAIN */
+main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+/* ANIMALS */
+.animals_container {
+  position: relative;
+}
+.animals_container .animal {
+  position: relative;
+  display: inline;
+  transition: all 2s;
+}
+
+.animals_container .animal img {
+  position: relative;
+}
+
+.animals_container .animal.Lion .animal_detail {
+  left: 4.8rem;
+  bottom: 2.5rem;
+}
+.animals_container .animal.Lion .animal_controller {
+  left: 4.5rem;
+  bottom: -1rem;
+}
+.animals_container .animal.Dino img {
+  /* padding-top: .5rem; */
+}
+.animals_container .animal.Dino .animal_detail {
+  left: 4.5rem;
+  bottom: 4rem;
+}
+.animals_container .animal.Dino .animal_controller {
+  left: 4.5rem;
+}
+.animals_container .animal .animal_controller {
+  position: absolute;
+  bottom: 0;
+  left: 3.5rem;
+  display: flex;
+  justify-content: center;
+}
+.animals_container .animal .animal_controller .animal_feed {
+  background-color: green; 
+}
+.animals_container .animal.dead .animal_controller .animal_feed {
+  opacity: .5;
+}
+.animals_container .animal .animal_controller .animal_remove {
+  background-color: red;
+}
+
+.animals_container .animal .animal_detail {
+  position: absolute;
+  left: 4rem;
+  bottom: 3.5rem;
+}
+
+.animals_container .animal .animal_detail {
+  text-align: center;
+}
+
+
+.animals_container .animal_detail .animal_foodLevel_container {
+  padding-top: 40px;
+}
+
+.animals_container .animal_detail .animal_foodLevel {
+  height: 2rem;
+  border: .2rem solid black;
+  width: 7rem;
+  position: relative;
+  margin-top: 1rem;
+}
+.animals_container .animal_detail .animal_foodLevel .gauge {
+  height: 100%;
+  transition: width .5s;
+}
