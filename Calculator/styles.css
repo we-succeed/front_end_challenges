@@ -1,39 +1,60 @@
+*  {
+    font-family: "Gill Sans", sans-serif;
+}
+body {
+    background-color: rgba(103, 161, 189, 0.897);
+}
 .container{
     text-align: center;
-    margin-top:23px
+    margin-top:23px;
 }
-
 table{
-    margin: auto;
+    border-spacing: 0;
 }
-
-input{
-    border-radius: 21px;
-    border: 5px solid #244624;
-    font-size:34px;
-    height: 65px;
-    width: 456px;
+table tr td {
+    padding: 0px;
+    border: 1px solid rgb(92, 92, 92);
+}
+.calculator_display{
+    background-color:  #242424;
+    font-size: 50px;
+    text-align: right;
+    padding: 5%;
+    color: #eeeeee;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 button{
-    border-radius: 20px;
     font-size: 40px;
-    background: #978fa0;
-    width: 102px;
-    height: 90px;
-    margin: 6px;
+    background: #ffffff;
+    width: 130px;
+    height: 80px;
+    border: 0;
 }
-
-.calculator{ 
-    border: 4px solid #13695d;
-    background-color: #ff99f7;
-    padding: 23px;
-    border-radius: 53px;
-    display: inline-block;
-    
-}
-
 h1{
     font-size: 28px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.calculator{ 
+    width: 50%;
+    margin: auto;
+}
+.operator_container {
+    display: flex;
+    width: 100%;
+    background-color: #ffffff;
+}
+.operator_container td button {
+    background-color: #a3a3a32c;
+}
+.number_container{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.number_container > button {
+    width: 130px;
+    border: 1px solid #a3a3a3;
 }
