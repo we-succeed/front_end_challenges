@@ -19,3 +19,11 @@
 2. Zoo - created by [@mikyYun](https://github.com/mikyYun)
 3. Game - created by [@mayfly950](https://github.com/mayfly950)
 4. TodoList - created by [@Aleumkim](https://github.com/Aleumkim)
+
+
+
+Zoom 회의 참가
+https://us04web.zoom.us/j/6403155472?pwd=YXNueGFSb0dUc0VOMzV3YlJUUngyQT09
+
+회의 ID: 640 315 5472
+암호: 2cJx6m
