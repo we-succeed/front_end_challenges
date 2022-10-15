@@ -1,6 +1,6 @@
-let screen = document.getElementById('screen');
-let process = document.getElementById('process');
-let buttons = document.querySelectorAll('button');
+const screen = document.getElementById('screen');
+const process = document.getElementById('process');
+const buttons = document.querySelectorAll('button');
 let resultValue = "";
 let screenValue = "";
 for (item of buttons) {
@@ -24,15 +24,15 @@ for (item of buttons) {
             resultValue += buttonText;
             screen.innerText = screenValue;
         }
-        else if (buttonText === '=') {
-            process.innerText = screenValue;
-            screen.innerText = eval(resultValue);
-        }
         else if (buttonText === 'AC') {
             screenValue = "";
             resultValue = "";
             screen.innerText = "\u00A0";
             process.innerText = "\u00A0";
+        }
+        else if (buttonText === '=') {
+            process.innerText = screenValue;
+            screen.innerText = eval(resultValue);
         }
         else {
             screenValue += buttonText;

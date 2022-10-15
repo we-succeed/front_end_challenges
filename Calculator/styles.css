@@ -8,20 +8,6 @@ h1{
     font-size: 28px;
     text-align: center;
 }
-.calculator_display{
-    background-color:  #242424;
-    font-size: 40px;
-    text-align: right;
-    padding: 3%;
-    color: #eeeeee;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
-.calculator_process {
-    font-size: 15px;
-    font-weight: 100;
-    padding-bottom: 10px;
-}
 .calculator{ 
     width: 50%;
     margin: auto;
@@ -36,7 +22,8 @@ table tbody td{
     border-style: solid; 
     padding: 0;
 }
-table thead th, table tfoot td {
+table thead th, 
+table tfoot td {
     padding: 0;
 }
 table tfoot div{
@@ -54,6 +41,20 @@ button{
 }
 button:hover{
     opacity: 0.8;
+}
+.calculator_display{
+    background-color:  #242424;
+    font-size: 40px;
+    text-align: right;
+    padding: 3%;
+    color: #eeeeee;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.calculator_process {
+    font-size: 15px;
+    font-weight: 100;
+    padding-bottom: 10px;
 }
 .numbers{
     background-color: #FFFFFF;
