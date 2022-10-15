@@ -4,44 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator</title>
+    <title>Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <div class="container">
-        <h1>Calculator</h1>
-        <div class="calculator">
-            <div id="number"  class='calculator_display'>123</div>
-            <table>
-                <tr class="operator_container">
-                    <td><button>+</button></td>
-                    <td><button>-</button></td>
-                    <td><button>X</button></td>
-                    <td><button>/</button></td>
-                </tr>
-                <tr>
-                    <td><button>7</button></td>
-                    <td><button>8</button></td>
-                    <td><button>9</button></td>
-                </tr>
-                <tr>
-                    <td><button>4</button></td>
-                    <td><button>5</button></td>
-                    <td><button>6</button></td>
-                </tr>
-                <tr>
-                    <td><button>1</button></td>
-                    <td><button>2</button></td>
-                    <td><button>3</button></td>
-                </tr>
-                <tr>
-                    <td><button>0</button></td>
-                    <td><button>.</button></td>
-                    <td><button>CE</button></td>
-                </tr>
+            <h1>Calculator</h1>
+            <table class="calculator">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="calculator_display">
+                            <div id="process"  class="calculator_process">&nbsp;</div>
+                            <div id="screen"  class="calculator_screen">&nbsp;</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><button type="button" class="operator">(</button></td>
+                        <td><button type="button" class="operator">)</button></td>
+                        <td><button type="button" class="operator">%</button></td>
+                        <td><button type="button" class="operator">AC</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="numbers">7</button></td>
+                        <td><button type="button" class="numbers">8</button></td>
+                        <td><button type="button" class="numbers">9</button></td>
+                        <td><button type="button"  class="operator">x</button></td>
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="numbers">4</button></td>
+                        <td><button type="button" class="numbers">5</button></td>
+                        <td><button type="button" class="numbers">6</button></td>
+                        <td><button type="button"  class="operator">÷</button></td>                    
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="numbers">1</button></td>
+                        <td><button type="button" class="numbers">2</button></td>
+                        <td><button type="button" class="numbers">3</button></td>
+                        <td><button type="button"  class="operator">-</button></td>                    
+                    </tr>
+                    <tr>
+                        <td><button type="button" class="numbers">0</button></td>
+                        <td><button type="button"  class="numbers">.</button></td>
+                        <td><button type="button"  class="equal">=</button></td>
+                        <td><button type="button"  class="operator">+</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <div>&nbsp;</div>
+                        </td>
+                    </tr>
+            </tfoot>
             </table>
-        </div>
     </div>
     <script type="text/javascript" src="script.js"></script>
 </body>
