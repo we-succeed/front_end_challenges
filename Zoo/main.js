@@ -42,7 +42,16 @@ class Animal {
     this.#dead = false;
     this.init();
   }
-
+  get name() {
+    return this._name;
+  }
+  set name(newName) {
+    newName = newName.trim();
+    if (newName === '') {
+      throw 'The name cannot be empty';
+    }
+    this._name = newName;
+  }
   init() {
     console.log(`${this.name} in ${this.type} added and it's foodType is ${this.foodType}`, `FoodLevel: ${this.foodLevel}`);
     this.updateStatus();
@@ -160,7 +169,7 @@ function generateClass(name, type, foodType) {
 /** Create Animal Component */
 function generateAnimal(e) {
   e.preventDefault();
-  const name = animalName.value;
+  const name = animalName.value.replace(/\s/g, "");
   const type = addSelector.value;
   const foodType = determineFoodType(type);
   if (foodType) {

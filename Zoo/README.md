@@ -65,7 +65,6 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
 * private
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
 
-
 ### Animal types
 * Mammal : Cat, Fox, Lion, Rabbit, Sheep
 * Bird : Chicken, Penguin, Duck
@@ -80,4 +79,48 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Privat
 1. html structuring
 2. css to make animal image and details inside image
 3. javascript
-  3-1. 
+
+## Charset UTF-8
+The HTML5 specification encourages web developers to use the UTF-8 character set, which covers almost all of the characters and symbols in the world!
+
+## private
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
+
+Class fields are `public` by default, but private class members can be created by using a hash `#` prefix. The privacy encapsulation of these class features is enforced  by JS itself.
+
+Private members are not native to the language before this syntax existed. In prototyppical inheritance, its behavior may be emulated with `WeakMap` opjects or `closures`, but they can't compare the `#` syntax in terms of ergonomics
+
+`private static` method cannot be used by instance. can accessible inside class
+
+```js
+  // private instance method
+  class ....{
+    #name
+    #age
+  }
+  // private instance field
+  class ....{
+    #checkName() {
+
+    }
+  }
+```
+
+## getter and setter
+```js
+  class Person {
+    constructor(name) {
+        this.name = name;
+    }
+    get name() {
+        return this._name;
+    }
+    set name(newName) {
+        newName = newName.trim();
+        if (newName === '') {
+            throw 'The name cannot be empty';
+        }
+        this._name = newName;
+    }
+}
+```
