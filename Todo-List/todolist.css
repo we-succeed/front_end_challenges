@@ -145,10 +145,14 @@ button, #add-todo-item{
 }
 
 ul{
+ width: 65%;
+ position: relative;
+ text-align: left;
+ margin-left: auto;
+ margin-right: auto;
  list-style-position: inside;
  background-color:#D6A2E8;
  color:white;
- width:60%;
- margin-left: 20%;
- margin-right: 20%;
+
+
 }
