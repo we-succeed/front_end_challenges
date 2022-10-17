@@ -31,16 +31,46 @@ main {
   position: relative;
 }
 .animals_container {
-  position: relative;
+  display: flex;
+  flex-wrap: wrap;
 }
 /* MAIN ANIMAL */
 .animals_container .animal {
   position: relative;
-  display: inline;
   transition: width 2s;
+  font-size: .8rem;
+  width: 300px;
+  height: 300px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-bottom: 1.5rem;
 }
-.animals_container .animal img {
-  position: relative;
+.animals_container .animal.Cat {
+  background-image: url("../images/animals/Cat.png");
+}
+.animals_container .animal.Lion {
+  background-image: url("../images/animals/Lion.png");
+}
+.animals_container .animal.Fox {
+  background-image: url("../images/animals/Fox.png");
+}
+.animals_container .animal.Rabbit {
+  background-image: url("../images/animals/Rabbit.png");
+}
+.animals_container .animal.Sheep {
+  background-image: url("../images/animals/Sheep.png");
+}
+.animals_container .animal.Chicken {
+  background-image: url("../images/animals/Chicken.png");
+}
+.animals_container .animal.Penguin {
+  background-image: url("../images/animals/Penguin.png");
+}
+.animals_container .animal.Duck {
+  background-image: url("../images/animals/Duck.png");
+}
+.animals_container .animal.Dino {
+  background-image: url("../images/animals/Dino.png");
 }
 .animals_container .animal .animal_controller {
   position: absolute;
@@ -65,6 +95,14 @@ main {
 .animals_container .animal.Dino .animal_controller {
   left: 4.2rem;
 }
+.animals_container .animal.Rabbit .animal_detail {
+  left: 4rem;
+  bottom: 3rem;
+}
+.animals_container .animal.Rabbit .animal_controller {
+  left: 4rem;
+  bottom: -1rem;
+}
 .animals_container .animal .animal_controller .animal_feed {
   background-color: green; 
 }
@@ -87,15 +125,15 @@ main {
 
 
 .animals_container .animal_detail .animal_foodLevel_container {
-  padding-top: 40px;
+  padding-top: 1rem;
 }
 
 .animals_container .animal_detail .animal_foodLevel {
-  height: 2rem;
+  height: .5rem;
   border: .2rem solid black;
   width: 7rem;
   position: relative;
-  margin-top: 1rem;
+  margin-top: .5rem;
 }
 .animals_container .animal_detail .animal_foodLevel .gauge {
   height: 100%;

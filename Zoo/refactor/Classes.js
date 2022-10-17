@@ -1,3 +1,4 @@
+/** Class Zoo **/
 export class Zoo {
   #animalList;
   constructor() {
@@ -12,73 +13,79 @@ export class Zoo {
       },
       Lion: {
         species: "Mammal",
-        foodType: "Omnivore",
+        foodType: "Carnivore",
         swimmable: "Yes",
         foodLevel: 15,
         list: {}
       },
       Fox: {
         species: "Mammal",
-        foodType: "Omnivore",
+        foodType: "Carnivore",
         swimmable: "Yes",
         foodLevel: 20,
         list: {}
       },
       Rabbit: {
         species: "Mammal",
-        foodType: "Omnivore",
-        swimmable: "Yes",
+        foodType: "Herbivore",
+        swimmable: "No",
         foodLevel: 40,
         list: {}
       },
       Sheep: {
         species: "Mammal",
-        foodType: "Omnivore",
+        foodType: "Herbivore",
         swimmable: "Yes",
         foodLevel: 30,
         list: {}
       },
       Chicken: {
-        species: "Mammal",
-        foodType: "Omnivore",
-        swimmable: "Yes",
+        species: "Bird",
+        foodType: "Herbivore",
+        swimmable: "No",
         foodLevel: 50,
         list: {}
       },
       Penguin: {
-        species: "Mammal",
-        foodType: "Omnivore",
+        species: "Bird",
+        foodType: "Carnivore",
         swimmable: "Yes",
         foodLevel: 35,
         list: {}
       },
       Duck: {
         species: "Mammal",
-        foodType: "Omnivore",
+        foodType: "Carnivore",
         swimmable: "Yes",
         foodLevel: 35,
         list: {}
       },
       Dino: {
-        species: "Mammal",
-        foodType: "Omnivore",
-        swimmable: "Yes",
-        foodLevel: 5,
+        species: "Raptile",
+        foodType: "Carnivore",
+        swimmable: "No",
+        foodLevel: 7,
         list: {}
       },
     };
+    this.deads = [];
   }
   /** getter cannot have parameters */
   get list() {
     return this.#animalList;
   }
+
+  /** setter parameter is from... animal.add = `this` */
   set add(animal) {
     this.#animalList[animal.type].list[animal.name] = { isAlive: true };
-    console.log("ADDED", animal, this.#animalList);
   }
 
   isExist(animal) {
     return this.list[animal.type].list[animal.name]?.isAlive;
+  }
+
+  returnSpecies(animal) {
+    return this.list[animal.type].species;
   }
 
   getDetails(animal) {
@@ -87,23 +94,32 @@ export class Zoo {
   }
 
   set remove(animal) {
-
+    delete this.list[animal.type].list[animal.name];
+    animal.dead = true;
   }
 
   feed(animal) {
     const foodLevel = this.list[animal.type].foodLevel;
     animal.eat = foodLevel;
   }
-  clear() {
 
+  // animal remove button
+  set dead(animal) {
+    this.list[animal.type].list[animal.name].isAlive = false;
+    this.deads.push(animal);
+  }
+  /** loop deads array and delete */
+
+  doClear() {
+    this.deads.forEach(animal => this.remove = animal);
+    this.deads = [];
   }
 }
 
+/** Class Animal **/
 class Animal {
   #dead;
   constructor(type, name) {
-    // super();
-
     this.name = name;
     this.type = type;
     this.foodLevel = Math.floor(Math.random() * 30) + 30;
@@ -113,54 +129,44 @@ class Animal {
   }
 
   init() {
-    // super.add = this; // setter
-    // const lists = super.list;
-    // console.log(lists);
+    console.log(`${this.name} in ${this.type} added`);
+    this.updateStatus();
   }
+
   set eat(lev) {
-    console.log(lev)
-    this._foodLevel += lev;
+    if (this.foodLevel + lev >= 100) return console.log(`${this.name} does not want to eat`);
+    this.foodLevel += lev;
   }
-  // get name() {
-  //   return this._name;
-  // }
-  // set name(newName) {
-  //   newName = newName.trim();
-  //   if (newName === '') {
-  //     throw 'The name cannot be empty';
-  //   }
-  //   this._name = newName;
-  // }
-  // init() {
-  //   console.log(`${this.name} in ${this.type} added and it's foodType is ${this.foodType}`, `FoodLevel: ${this.foodLevel}`);
-  //   this.updateStatus();
-  // }
 
-  // setFoodLevel() {
-  //   let initialLevel = Math.floor(Math.random() * 30) + 30; // min 30% to max 60%
-  //   return initialLevel;
-  // }
+  updateStatus() {
+    const interval = setInterval(() => {
+      // setInterval(() => {
+      this.foodLevel -= .5;
+      if (this.isDead) {
+        clearInterval(interval);
+        console.log("CLEAR")
+      }
+      if (this.foodLevel <= 0) {
+        this.dead = true;
+        this.foodLevel = 0;
+        clearInterval(interval);
+      }
+      if (this.foodLevel >= 50) this.color = "blue";
+      if (this.foodLevel < 50) this.color = "orange";
+      if (this.foodLevel < 25) this.color = "red";
+    }, 200);
+  }
 
-  // updateStatus() {
-  //   const interval = setInterval(() => {
-  //     this.foodLevel -= 2;
-  //     if (this.foodLevel <= 0) {
-  //       this.dead();
-  //       this.foodLevel = 0;
-  //       clearInterval(interval);
-  //     }
-  //     if (this.foodLevel >= 50) this.color = "blue";
-  //     if (this.foodLevel < 50) this.color = "orange";
-  //     if (this.foodLevel < 25) this.color = "red";
-  //   }, 500);
-  // }
+  get isDead() {
+    return this.#dead;
+  }
 
-  // dead() {
-  //   this.#dead = true;
-  //   console.log(`${this.name} is dead`);
-  // }
+  set dead(isDead) {
+    this.#dead = isDead;
+    console.log(`${this.name}(in ${this.type}) is dead`);
+  }
 }
 
 export class Mammal extends Animal { }
-export class Fish extends Animal { }
+export class Bird extends Animal { }
 export class Raptile extends Animal { }
