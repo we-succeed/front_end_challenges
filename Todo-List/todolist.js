@@ -43,7 +43,7 @@ $("#formToDo").on('submit',function(e){
   });
   
   //clear the items with new class--that is mark completed
-  $( "#clearDone" ).click(function() {
+  $( "#clearBtn" ).click(function() {
     $( "li.markComplete" ).remove();
     updateListCount();
   });
