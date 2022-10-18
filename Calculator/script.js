@@ -3,7 +3,8 @@ const process = document.getElementById('process');
 const buttons = document.querySelectorAll('button');
 let resultValue = "";
 let screenValue = "";
-for (item of buttons) {
+
+for (item of buttons) { 
     item.addEventListener('click', (e) => {
         buttonText = e.target.innerText;
         if (buttonText === 'x') {
