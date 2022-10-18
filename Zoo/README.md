@@ -1,5 +1,7 @@
 # Project_Zoo Tycoon
 
+<img src="./zoo.jpg" alt="image"></img>
+
 This is mini project practicing OOP concept of JavaScript.<br />
 ## Plan
 * ~~Scrub image resources if animals~~
@@ -12,21 +14,22 @@ Image cutting tool : Photoshop
 
 ## Design
 * Each category's max capacity is 10
-* Each animal has name, foodLevel, own character(active, lazy, immature, sensitive, eccentric, moody)
+* Each animal has name, foodLevel, own character(swimmable)
 * User can feed animals if animal's foodLevel is below...
 
-1. home page = zoo background. enter `start` to start
-2. main page = control section on header or aside, main zoo on main
+1. main page = control section on header, main zoo on main
 3. import or create animal with `add` button
   3-1. click `add` will show detail card (name, category)
-  3-2. click `confirm` will create the animal with random foodLevel and character
-  3-3. `cannot add` if the capacity is 10 and disabled the category
+  3-2. animal generated with own foodLevel, type, ability
+  3-3. `cannot add` if the capacity is 10 OR same name in the type already exist
 4. remove animal with `remove` button
   4-1. click `remove` will show all lists of animals
   4-2. click animal want to remove
   4-3. click `confirm` will remove the animal
 5. feed animals if animal's foodLevel is below.. ?
-  5-1. click feed on animal card OR `autoFeed` button on control section
+  5-1. click feed on animal card 
+6. clear all dead animals with clear button in header
+
 
 ## module import vs require
 * Import => provided by ES6
@@ -97,6 +100,10 @@ Private members are not native to the language before this syntax existed. In pr
   class ....{
     #name
     #age
+    constructor() {
+      this.#name....
+      this.#age...
+    }
   }
   // private instance field
   class ....{
@@ -123,4 +130,11 @@ Private members are not native to the language before this syntax existed. In pr
         this._name = newName;
     }
 }
+const mike = new Person("mike");
+
+// use getter
+mike.name // return  "mike"
+// use setter
+mike.name = "mikeYun"
+mike.name // return "mikeYun"
 ```
