@@ -94,7 +94,7 @@ var blocks = setInterval(function () {
 }, 1);
 
 const refreshButton = document.querySelector('.reset');
-const refreshPage = () => {
+const refreshPage = function () {
     location.reload();
 };
 refreshButton.addEventListener('click', refreshPage);
