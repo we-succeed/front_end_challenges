@@ -3,28 +3,11 @@ const process = document.getElementById('process');
 const buttons = document.querySelectorAll('button');
 let resultValue = "";
 let screenValue = "";
-for (item of buttons) {
+
+for (item of buttons) { 
     item.addEventListener('click', (e) => {
         buttonText = e.target.innerText;
-        if (buttonText === 'x') {
-            screenValue += buttonText;
-            buttonText = '*';
-            resultValue += buttonText;
-            screen.innerText = screenValue;
-        }
-        else if (buttonText === '÷') {
-            screenValue += buttonText;
-            buttonText = '/';
-            resultValue += buttonText;
-            screen.innerText = screenValue;
-        }
-        else if (buttonText === '%') {
-            screenValue += buttonText;
-            buttonText = '*0.01';
-            resultValue += buttonText;
-            screen.innerText = screenValue;
-        }
-        else if (buttonText === 'AC') {
+        if (buttonText === 'AC') {
             screenValue = "";
             resultValue = "";
             screen.innerText = "\u00A0";
@@ -32,7 +15,7 @@ for (item of buttons) {
         }
         else if (buttonText === '=') {
             process.innerText = screenValue;
-            screen.innerText = eval(resultValue);
+            screen.innerText = eval(resultValue.replace('÷','/').replace('%','*0.01').replace('x','*'));
         }
         else {
             screenValue += buttonText;
