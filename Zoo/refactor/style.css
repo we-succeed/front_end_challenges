@@ -46,31 +46,31 @@ main {
   margin-bottom: 1.5rem;
 }
 .animals_container .animal.Cat {
-  background-image: url("../images/animals/Cat.png");
+  background-image: url("../images/animals/cat.png");
 }
 .animals_container .animal.Lion {
-  background-image: url("../images/animals/Lion.png");
+  background-image: url("../images/animals/lion.png");
 }
 .animals_container .animal.Fox {
-  background-image: url("../images/animals/Fox.png");
+  background-image: url("../images/animals/fox.png");
 }
 .animals_container .animal.Rabbit {
-  background-image: url("../images/animals/Rabbit.png");
+  background-image: url("../images/animals/rabbit.png");
 }
 .animals_container .animal.Sheep {
-  background-image: url("../images/animals/Sheep.png");
+  background-image: url("../images/animals/sheep.png");
 }
 .animals_container .animal.Chicken {
-  background-image: url("../images/animals/Chicken.png");
+  background-image: url("../images/animals/chicken.png");
 }
 .animals_container .animal.Penguin {
-  background-image: url("../images/animals/Penguin.png");
+  background-image: url("../images/animals/penguin.png");
 }
 .animals_container .animal.Duck {
-  background-image: url("../images/animals/Duck.png");
+  background-image: url("../images/animals/duck.png");
 }
 .animals_container .animal.Dino {
-  background-image: url("../images/animals/Dino.png");
+  background-image: url("../images/animals/dino.png");
 }
 .animals_container .animal .animal_controller {
   position: absolute;
