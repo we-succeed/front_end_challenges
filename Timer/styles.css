@@ -1,0 +1,10 @@
+*  {
+    font-family: "Gill Sans", sans-serif;
+}
+body {
+    background-color: rgba(194, 229, 247, 0.897);
+}
+h1{
+    font-size: 28px;
+    text-align: center;
+}
