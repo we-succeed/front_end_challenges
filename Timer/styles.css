@@ -1,10 +1,64 @@
-*  {
-    font-family: "Gill Sans", sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+:root {
+  --primary-color: rgb(136, 182, 135);
+  --primary-color-darker: rgb(85, 112, 84);
 }
+
+* {
+  box-sizing: border-box;
+  outline: 0;
+  padding:0;
+  margin:0;
+}
+
 body {
-    background-color: rgba(194, 229, 247, 0.897);
+  margin: 0;
+  padding: 0;
+  background: var(--primary-color);
+  font-family: 'Open sans', sans-serif;
+  font-size: 1.3em;
+  line-height: 1.5em;
+}
+
+.container {
+  max-width: 640px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
 }
 h1{
-    font-size: 28px;
-    text-align: center;
+  text-align:center;
+  margin:10px 0;
+}
+.watch{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 50px 0;
+}
+h2{
+  font-size:3em;
+  font-weight:400;
+  height: 50px;
+  width: 335px;
+}
+h2.paused{
+  color:red;
+}
+.buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px 0;
+}
+.buttons button{
+  margin:0 5px;
+  border:none;
+  padding:10px;
+  background-color: var(--primary-color-darker);
+  color:#FFF;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  border-radius:5px;
 }
