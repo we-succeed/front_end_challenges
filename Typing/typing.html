@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Typing Game</title>
+	<link rel="stylesheet" href="styles/styles.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+	<div class="header">
+    <h1>Typing Master!!</h1>
+	</div>
+	
+	<div class="word-display">
+		Hello
+	</div>
+
+	<div class="word-input-box"> 
+	  <input type="text" class="word-input"></input>
+	</div>
+	 
+	<div>
+	<span class="name">Name: </span>
+	</div>
+
+	<div class="game-info">
+	<div>
+		Time: <span class="time">0</span>seconds.<br>
+	</div>
+	<div>
+	 	Score: <span class="score">0</span>point.
+	</div>
+  </div>
+
+	<div class="button-info"> 
+
+	<button class="name-button">Enter your name</button>
+	<button class="button loading" onclick="run()">Loading..</button>
+	<button class="hard loading2" onclick="run2()">Loading..</button>
+
+
+	</div>
+
+	<div class="toast-wrap">
+  
+	</div>
+		 
+	<script src="script/main.js"></script>
+</body>
+</html>
+
