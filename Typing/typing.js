@@ -10,7 +10,6 @@ let score = 0;
 const url = "https://random-word-api.herokuapp.com/all";
 const timeDisplay = document.querySelector('.time')
 const button = document.querySelector('.button')
-const button2 = document.querySelector('.hard')
 const wordDisplay = document.querySelector('.word-display')
 const wordInput = document.querySelector('.word-input')
 const scoreDisplay = document.querySelector('.score')
@@ -108,31 +107,8 @@ function buttonChange(type, text) {
     type === 'loading' ? button.classList.add('loading') : button.classList.remove('loading')
 }
 
-// hard mode
 
 
-init2();
-function init2() {
-    getWords2();
-    wordInput.addEventListener('keyup', checkMatch2)
-}
-
-function run2() {
-    diffcult='hard';
-    if (words.length < 1) {
-        return;
-    }
-    wordInput.value = "";
-    wordInput.focus()
-    score = 0;
-    
-    scoreDisplay.innerText = 0;
-    time = 7; 
-    isPlaying = true;
-    timeInterval2 = setInterval(countDown2, 1000)
-    checkInterval2 = setInterval(checkStatus2, 50)
-    buttonChange2('hard', 'Playing..')
-}
 
 function checkStatus2() {
  
@@ -164,39 +140,6 @@ function checkMatch2() {
     
 }}
 
-
-
-function countDown2() {
-  
-    time > 0 ? time-- : isPlaying = false;
-    
-    timeDisplay.innerText = time;    
-    if (!isPlaying) {
-        clearInterval(timeInterval2)
-    }
-    // console.log('count')
-}
-
-
-//getwords
-function getWords2() {
-    axios.get(url).then((res) => {
-
-        res.data.forEach((word) => {
-            if (word.length < 7) {
-                words.push(word);
-            }
-            buttonChange2('start', 'Hard Mode Start')
-        })
-    }).catch((err) => {
-        console.log(err);
-    })
-}
-
-function buttonChange2(type, text) {
-    button2.innerText = text;
-    type === 'loading2' ? button2.classList.add('loading2') : button2.classList.remove('loading2')
-}
 
 
 function runNotification(type) {
