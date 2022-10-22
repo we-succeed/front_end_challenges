@@ -20,7 +20,6 @@ const findMatches = (regex) => {
 };
 
 const displayLists = (e) => {
-  console.log(initList)
   if (!e.target.value) {
     lists.innerHTML = "";
     lists.appendChild(initList)
