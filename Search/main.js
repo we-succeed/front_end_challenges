@@ -1,18 +1,18 @@
 let canada;
-
+const initList = document.querySelector(".init")
 const fetching = () => {
   fetch("./canada.json")
-    .then(res => res.json())
-    .then(data => {
-      canada = data;
-    })
-    .catch(err => console.error("ERROR", err));
+  .then(res => res.json())
+  .then(data => {
+    canada = data;
+  })
+  .catch(err => console.error("ERROR", err));
 };
 fetching();
 
 const findMatches = (regex) => {
   return canada.filter(location => {
-
+    
     // regex can't accept dynamic value. Use new RegExp
     
     return location[0].match(regex) || location[1].match(regex);
@@ -20,7 +20,12 @@ const findMatches = (regex) => {
 };
 
 const displayLists = (e) => {
-  if (!e.target.value) return lists.innerHTML = "";
+  console.log(initList)
+  if (!e.target.value) {
+    lists.innerHTML = "";
+    lists.appendChild(initList)
+    return
+  }
   const input = e.target.value;
   const regex = new RegExp(input, "gi");
   const filteredLocations = findMatches(regex);
