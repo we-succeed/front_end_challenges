@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <section class="container">
-        <h1>Simple JS Date Stopwatch</h1>
+  <div class="tab">
+    <button class="tablinks" onclick="openFeature(e, 'stopwatch')">Stopwatch</button>
+    <button class="tablinks" onclick="openFeature(e, 'timer')">Pomodoro Timer</button>
+  </div>
+    <section class="container stopwatch">
+        <h1>Simple Stopwatch</h1>
         <div class="watch">
           <h2 id="watch">00:00:00:00</h2>
         </div>
@@ -19,6 +23,20 @@
           <button id="reset">Reset</button>
         </div>
     </section>
+    <section class="container timer">
+      <h1>Pomodoro Timer</h1>
+      <div id="countdown">
+        <div id="countdown-number"></div>
+        <svg>
+          <circle r="18" cx="20" cy="20"></circle>
+          <circle r="22" cx="20" cy="20" class='base'></circle>
+        </svg>
+      </div>
+      <div class="buttons">
+        <button id="start">Start</button>
+        <button id="reset">Reset</button>
+      </div>
+  </section>
     <script type="text/javascript" src="script.js"></script>
 </body>
 
