@@ -77,34 +77,51 @@ h2.paused{
   display: inline-block;
   line-height: 40px;
 }
-
-svg {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50px;
-  height: 50px;
-  transform: rotateY(-180deg) rotateZ(-90deg);
-}
-
-svg circle {
-  stroke-dasharray: 113px;
-  stroke-dashoffset: 0px;
-  stroke-linecap: round;
-  stroke-width: 2px;
-  stroke: rgb(255, 8, 8);
-  fill: none;
-  animation: countdown 10s linear infinite forwards;
-}
-svg circle.base {
-  stroke: rgb(255, 123, 0);
-  animation: none;
-}
 @keyframes countdown {
   from {
-    stroke-dashoffset: 0px;
+    stroke-dashoffset: 0;
+    stroke-dasharray: 500;
   }
   to {
-    stroke-dashoffset: 113px;
+    stroke-dashoffset: 500;
+    stroke-dasharray: 500;
   }
+}
+
+svg {
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateZ(-90deg);
+}
+
+svg .circle {
+  stroke: rgba(188, 0, 84, 1);
+  stroke-width: 16;
+  fill: transparent;
+  stroke-dashoffset: 500;
+  stroke-dasharray: 0;
+  animation: 30s circletimer linear;
+}
+
+    
+svg  .base {
+  stroke: rgba(188, 0, 84, 1);
+  stroke-width: 16;
+  fill: transparent;
+  stroke-dashoffset: 500;
+  stroke-dasharray: 0;
+  animation: 30s circletimer ;
+}
+
+.timers {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(188, 0, 84, 1);
+  font-size: 42px;
+  font-weight: 700;
 }

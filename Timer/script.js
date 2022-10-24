@@ -34,14 +34,24 @@ document.addEventListener('click', (e) =>{
   if (el.id === 'pause') pauseWatch();
   if (el.id === 'reset') resetWatch();
 });
+var timers = document.getElementById('timers');
 
-var countdownNumberEl = document.getElementById('countdown-number');
-var countdown = 10;
+function clearCountdown(interval) {
+  clearTimeout(interval);
+}
 
-countdownNumberEl.textContent = countdown;
+function countdown() {
+  var countdownBegin = 30;
+  var count = setInterval(function() {
+    console.log(countdownBegin);
+    if (countdownBegin <= 0) {      
+      timers.innerText='Done';
+      clearCountdown(count);
+    } else {
+      --countdownBegin;
+      timers.innerText=countdownBegin;  
+    }    
+  }, 1000);
+}
 
-setInterval(function() {
-  countdown = --countdown <= 0 ? 10 : countdown;
-
-  countdownNumberEl.textContent = countdown;
-}, 1000);
+countdown();
