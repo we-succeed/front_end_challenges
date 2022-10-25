@@ -1,41 +1,28 @@
+/* common css */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 :root {
   --primary-color: rgb(136, 182, 135);
   --primary-color-darker: rgb(85, 112, 84);
+  --primary-color-reverse:rgb(66, 197, 249);
+  --primary-color-warning:rgb(255,0,0);
 }
-
 * {
   box-sizing: border-box;
   outline: 0;
   padding:0;
   margin:0;
+  font-family: 'Open sans', sans-serif;
 }
-
 body {
   margin: 0;
   padding: 0;
   background: var(--primary-color);
-  font-family: 'Open sans', sans-serif;
   font-size: 1.3em;
   line-height: 1.5em;
-}
-
-.container {
-  max-width: 640px;
-  margin: 50px auto;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
 }
 h1{
   text-align:center;
   margin:10px 0;
-}
-.watch{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin: 50px 0;
 }
 h2{
   font-size:3em;
@@ -43,8 +30,53 @@ h2{
   height: 50px;
   width: 335px;
 }
-h2.paused{
-  color:red;
+/*Tab css*/
+.tabs{
+  display: flex;
+  max-width: 640px;
+  margin: 10% auto  0 auto;
+}
+.tabs button{
+  width: 30%;
+  height: 40px;
+  border: 0;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.tabs button:first-child{
+  border-right-width: 0.01em;
+  border-color: var(--primary-color-darker);
+  border-style: solid;
+} 
+.tabs button:hover{
+  background-color: var(--primary-color-darker);
+  color: #ffffff;
+} 
+.selected {
+  background-color: var(--primary-color-darker);
+  color: #ffffff;
+}
+/*Stopwatch css*/
+.container{
+  max-width: 640px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-top: 2px solid var(--primary-color-darker);
+}
+.stopwatch{
+  display: block;
+}
+
+/*Stopwatch change class list css*/
+.paused{
+  color: var(--primary-color-warning);
+}
+.watch{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 50px 0;
 }
 .buttons{
   display: flex;
@@ -62,32 +94,31 @@ h2.paused{
   letter-spacing:0.1em;
   border-radius:5px;
 }
-
 #countdown {
   position: relative;
   margin: auto;
-  margin-top: 100px;
-  height: 40px;
-  width: 40px;
+  height: 200px;
+  width: 200px;
   text-align: center;
 }
-
+.pomodoro-timer{
+  display: none;
+}
 #countdown-number {
-  color: rgb(255, 42, 42);
+  color: var(--primary-color-darker);
   display: inline-block;
   line-height: 40px;
 }
 @keyframes countdown {
   from {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 500;
-  }
-  to {
     stroke-dashoffset: 500;
     stroke-dasharray: 500;
   }
+  to {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 500;
+  }
 }
-
 svg {
   background-color: transparent;
   position: absolute;
@@ -97,22 +128,19 @@ svg {
 }
 
 svg .circle {
-  stroke: rgba(188, 0, 84, 1);
+  stroke:  var(--primary-color-reverse);
   stroke-width: 16;
   fill: transparent;
   stroke-dashoffset: 500;
   stroke-dasharray: 0;
-  animation: 30s circletimer linear;
+  animation: 60s countdown linear;
 }
-
-    
-svg  .base {
-  stroke: rgba(188, 0, 84, 1);
+svg .base {
+  stroke:  #e3e3e3;
   stroke-width: 16;
   fill: transparent;
   stroke-dashoffset: 500;
   stroke-dasharray: 0;
-  animation: 30s circletimer ;
 }
 
 .timers {
@@ -121,7 +149,7 @@ svg  .base {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: rgba(188, 0, 84, 1);
+  color:  var(--primary-color-reverse);
   font-size: 42px;
   font-weight: 700;
 }

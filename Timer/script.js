@@ -41,17 +41,28 @@ function clearCountdown(interval) {
 }
 
 function countdown() {
-  var countdownBegin = 30;
+  var countdownBegin = 3600;
   var count = setInterval(function() {
-    console.log(countdownBegin);
     if (countdownBegin <= 0) {      
       timers.innerText='Done';
       clearCountdown(count);
     } else {
       --countdownBegin;
       timers.innerText=countdownBegin;  
+      Math.floor(((1000*60*60)) / (1000*60)),
+      Math.floor(((1000*60)) / 1000);
+      console.log(Math.floor(((1000*60)) / 1000))
     }    
   }, 1000);
 }
 
-countdown();
+const openFeature = ((e, tab) => {
+  Array.from(document.getElementsByClassName('container')).forEach(item => {
+    item.style.display = "none";
+  })
+  document.getElementsByClassName(tab)[0].style.display = "block";
+  Array.from(document.getElementsByClassName('tablinks')).forEach(btn => {
+    btn.className = btn.className.replace(" selected", "");
+  })
+  e.currentTarget.className += " selected";
+})
