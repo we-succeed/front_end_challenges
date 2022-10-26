@@ -3,7 +3,6 @@
 :root {
   --primary-color: rgb(136, 182, 135);
   --primary-color-darker: rgb(85, 112, 84);
-  --primary-color-reverse:rgb(66, 197, 249);
   --primary-color-warning:rgb(255,0,0);
 }
 * {
@@ -128,12 +127,12 @@ svg {
 }
 
 svg .circle {
-  stroke:  var(--primary-color-reverse);
+  stroke:  var(--primary-color-darker);
   stroke-width: 16;
   fill: transparent;
   stroke-dashoffset: 500;
   stroke-dasharray: 0;
-  animation: 60s countdown linear;
+  animation: 3600s countdown linear;
 }
 svg .base {
   stroke:  #e3e3e3;

@@ -42,6 +42,8 @@ function clearCountdown(interval) {
 
 function countdown() {
   var countdownBegin = 3600;
+  let dateTimer = new Date(countdownBegin).getTime();
+  console.log(dateTimer);
   var count = setInterval(function() {
     if (countdownBegin <= 0) {      
       timers.innerText='Done';
@@ -49,16 +51,12 @@ function countdown() {
     } else {
       --countdownBegin;
       timers.innerText=countdownBegin;  
-      Math.floor(((1000*60*60)) / (1000*60)),
-      Math.floor(((1000*60)) / 1000);
-      console.log(Math.floor(((1000*60)) / 1000))
     }    
   }, 1000);
 }
-
-const openFeature = ((e, tab) => {
-  Array.from(document.getElementsByClassName('container')).forEach(item => {
-    item.style.display = "none";
+const openTabs = ((e, tab) => {
+  Array.from(document.getElementsByClassName('container')).forEach(elem => {
+    elem.style.display = "none";
   })
   document.getElementsByClassName(tab)[0].style.display = "block";
   Array.from(document.getElementsByClassName('tablinks')).forEach(btn => {
@@ -66,3 +64,26 @@ const openFeature = ((e, tab) => {
   })
   e.currentTarget.className += " selected";
 })
+
+countdown();
+// computed: {
+//   time: function() {
+//   return this.minutes + “ : “ + this.seconds;
+//   },
+//   hours: function() {
+//   var milli = this.milliseconds;
+//   // var hrs = new Date().getHours();
+//   // Used getHours() since the below didn’t work for me
+//   var hrs = Math.floor((milli / 3600000) % 24);
+//   if (hrs >= 13) { hrs = hrs — 12 }
+//   return hrs >= 10 ? hrs : ‘0’ + hrs;
+//   },
+//   minutes: function() {
+//   var min = Math.floor(this.totalTime / 60);
+//   return min >= 10 ? min : ‘0’ + min;
+//   },
+//   seconds: function() {
+//   var sec = this.totalTime — (this.minutes * 60);
+//   return sec >= 10 ? sec : ‘0’ + sec;
+//   }
+//   }
