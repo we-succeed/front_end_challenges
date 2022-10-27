@@ -108,16 +108,6 @@ h2{
   display: inline-block;
   line-height: 40px;
 }
-@keyframes countdown {
-  from {
-    stroke-dashoffset: 500;
-    stroke-dasharray: 500;
-  }
-  to {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 500;
-  }
-}
 svg {
   background-color: transparent;
   position: absolute;
@@ -126,20 +116,22 @@ svg {
   transform: translate(-50%, -50%) rotateZ(-90deg);
 }
 
-svg .circle {
+svg .progress {
   stroke:  var(--primary-color-darker);
   stroke-width: 16;
+  stroke-linecap: round;
   fill: transparent;
-  stroke-dashoffset: 500;
-  stroke-dasharray: 0;
-  animation: 3600s countdown linear;
 }
 svg .base {
   stroke:  #e3e3e3;
   stroke-width: 16;
   fill: transparent;
-  stroke-dashoffset: 500;
-  stroke-dasharray: 0;
+}
+svg .sec {
+  stroke:  #f56262;
+  stroke-width: 5;
+  fill: transparent;
+  stroke-linecap: round;
 }
 
 .timers {
