@@ -1,13 +1,9 @@
-// 'use strict';
-// const TIME = 7;
 const SETTING_TIME = 15;
 let words = [];
 let time;
 let isPlaying = false;
 let score = 0;
 
-
-const url = "https://random-word-api.herokuapp.com/all";
 const timeDisplay = document.querySelector('.time')
 const button = document.querySelector('.button')
 const wordDisplay = document.querySelector('.word-display')
@@ -33,7 +29,6 @@ function init() {
 
 
 function checkStatus() {
-    // console.log('checkstatus1')
     if (!isPlaying && time === 0) {
         isPlaying = false;
         buttonChange('start', 'Done');
@@ -84,62 +79,44 @@ function countDown() {
     if (!isPlaying) {
         clearInterval(timeInterval)
     }
-    // console.log('count')
+
 }
 
-// 단어 가져오기
 function getWords() {
-    axios.get(url).then((res) => {
+    // axios.get('https://random-word-api.herokuapp.com/all')
+    // .then((res) => {
+    //     res.data.forEach((word) => {
+    //         if (word.length < 7) {
+    //             words.push(word);
+    //         }
+    //         buttonChange('start', 'Easy Mode Start')
+    //     })
+    // }).catch((err) => {
+    //     console.log(err);
+    // })
 
-        res.data.forEach((word) => {
+    fetch('https://random-word-api.herokuapp.com/all')
+    .then((res) => res.json())
+    .then(data => {
+               
+        console.log(data)
+        data.forEach((word) => {
             if (word.length < 7) {
                 words.push(word);
             }
             buttonChange('start', 'Easy Mode Start')
         })
-    }).catch((err) => {
+    })
+    .catch((err) => {
         console.log(err);
     })
+
 }
 
 function buttonChange(type, text) {
     button.innerText = text;
     type === 'loading' ? button.classList.add('loading') : button.classList.remove('loading')
 }
-
-
-
-
-function checkStatus2() {
- 
-    console.log('checkstatus2')
-    if (!isPlaying && time === 0) {
-
-        isPlaying = false;
-        buttonChange2('start', 'Done');
-        clearInterval(checkInterval2)
-    }
-}
-
-function checkMatch2() {
-    console.log('match2');
-    if (wordInput.value.toLowerCase() === wordDisplay.innerText.toLowerCase()) {
-        wordInput.value = "";
-        if (!isPlaying) {
-            runNotification1('error')
-            return
-        }
-        time = 7; 
-        timeDisplay.innerText = time;
-        score ++;
-        scoreDisplay.innerText = score;
-        const randomIndex = Math.floor(Math.random() * words.length)
-        wordDisplay.innerText = words[randomIndex];
-        runNotification1('success')
-        console.log('count')
-    
-}}
-
 
 
 function runNotification(type) {
@@ -159,3 +136,6 @@ function runNotification(type) {
     }
 
     Toastify(option).showToast();}
+
+
+
