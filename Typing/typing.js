@@ -66,8 +66,6 @@
         }
     }
 
-    let diffcult = 'hard';
-
     function checkMatch() {
         if (wordInput.value.toLowerCase() === wordDisplay.innerText.toLowerCase()) {
             wordInput.value = "";
@@ -84,7 +82,6 @@
         }
     }
 
-
     function run() { 
         if (words.length < 1) {
             return;
@@ -92,7 +89,7 @@
         wordInput.value = "";
         wordInput.focus()
         score = 0;
-        scoreDisplay.innerText = 0;
+        scoreDisplay.innerText = 0; 
         time = SETTING_TIME;
         isPlaying = true;
         timeInterval = setInterval(countDown, 1000)
