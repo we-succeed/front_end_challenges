@@ -63,6 +63,7 @@ function countdown() {
     }
   }, 10);
 }
+
 const openTabs = ((e, tab) => {
   Array.from(document.getElementsByClassName('container')).forEach(elem => {
     elem.style.display = "none";
@@ -75,24 +76,3 @@ const openTabs = ((e, tab) => {
 })
 
 countdown();
-// computed: {
-//   time: function() {
-//   return this.minutes + “ : “ + this.seconds;
-//   },
-//   hours: function() {
-//   var milli = this.milliseconds;
-//   // var hrs = new Date().getHours();
-//   // Used getHours() since the below didn’t work for me
-//   var hrs = Math.floor((milli / 3600000) % 24);
-//   if (hrs >= 13) { hrs = hrs — 12 }
-//   return hrs >= 10 ? hrs : ‘0’ + hrs;
-//   },
-//   minutes: function() {
-//   var min = Math.floor(this.totalTime / 60);
-//   return min >= 10 ? min : ‘0’ + min;
-//   },
-//   seconds: function() {
-//   var sec = this.totalTime — (this.minutes * 60);
-//   return sec >= 10 ? sec : ‘0’ + sec;
-//   }
-//   }
