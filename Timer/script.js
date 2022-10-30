@@ -1,15 +1,21 @@
 const watch = document.querySelector('#watch');
 let milliseconds = 0;
 let timer;
+document.addEventListener('click', (e) => {
+  const el = e.target;
+  if (el.id === 'start') startWatch();
+  if (el.id === 'pause') pauseWatch();
+  if (el.id === 'reset') resetWatch();
+});
 
 function startWatch() {
   watch.classList.remove('paused');
   clearInterval(timer);
   timer = setInterval(() => {
     milliseconds += 10;
-    let dateTimer = new Date(milliseconds);
+    let dateTimer = new Date(milliseconds); //
     watch.innerHTML =
-      ('0' + dateTimer.getUTCHours()).slice(-2) + ':' +
+      ('0' + dateTimer.getUTCHours()).slice(-2) + ':' + 
       ('0' + dateTimer.getUTCMinutes()).slice(-2) + ':' +
       ('0' + dateTimer.getUTCSeconds()).slice(-2) + ':' +
       ('0' + dateTimer.getUTCMilliseconds()).slice(-3, -1);
@@ -28,17 +34,8 @@ function resetWatch() {
   watch.innerHTML = '00:00:00:00';
 };
 
-document.addEventListener('click', (e) => {
-  const el = e.target;
-  if (el.id === 'start') startWatch();
-  if (el.id === 'pause') pauseWatch();
-  if (el.id === 'reset') resetWatch();
-});
+// Pomodoro Timer
 var timers = document.getElementById('timers');
-
-function clearCountdown(interval) {
-  clearTimeout(interval);
-}
 
 function countdown() {
   let progress = document.querySelector('.progress');
@@ -52,12 +49,12 @@ function countdown() {
   var count = setInterval(function () {
     if (sec <= 0) {
       timers.innerText = 'Done';
-      clearCountdown(count);
+      clearTimeout(count);
     } else {
       --sec;
       let mins = Math.floor(sec / 60 / unit).toString().padStart(2, '0');
       let modSec = Math.floor(sec % (60 * unit) / unit).toString().padStart(2, '0');
-      timers.innerText = `${mins} : ${modSec}`;
+      timers.innerText = `${mins} : ${modSec}`
       secSession.setAttribute('stroke-dashoffset', strokeDashSec * (1 / (60*unit) * (sec % (60*unit))));
       progress.setAttribute('stroke-dashoffset', strokeDashMin * (1 / 25 * (sec / (60*unit))));
     }
