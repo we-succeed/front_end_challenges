@@ -76,9 +76,9 @@
             score++;
             scoreDisplay.innerText = score;
             time=SETTING_TIME;
+            runNotification('success')
             const randomIndex = Math.floor(Math.random() * words.length)
             wordDisplay.innerText = words[randomIndex];
-            runNotification('success')
         }
     }
 
@@ -127,8 +127,4 @@
             option.position = 'right'
             option.backgroundColor = 'red'
         }
-
         Toastify(option).showToast();}
-
-
-

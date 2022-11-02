@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(217, 247, 222, 0.596);
+}
+
+#main {
+  width: 100%;
+  padding: 0 1rem;
+}
+
+h2 {
+  width: 100%;
+  margin: auto;
+}
+
+.comments_container {
+  position: relative;
+}
+.comment_container {
+  position: relative;
+  padding-top: 1rem;
+  border: 2px solid black;
+  display: flex;
+  margin-top: 1rem;
+  /* flex: 1 1 auto; */
+  /* flex-grow: 1; */
+}
+.comment_container:first-child {
+  margin-top: 0;
+}
+.comment_container .postId {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  background-color: blanchedalmond;
+  border-bottom: 2px solid grey;
+  padding: 0 .5rem;
+}
+.comment_container .comment_infoBox {
+  position: flex;
+  flex-direction: row;
+  padding: .5rem;
+}
+
+.comment_container .comment_infoBox .user {
+  font-size: .5rem;
+  position: relative;
+  left: 0;
+  padding-left: .5rem;
+  padding-right: 5rem;
+}
+.comment_container .comment_infoBox .user .posted_by {
+  font-style: italic;
+}
+.comment_container .comment_infoBox .user .name {
+  font-weight: bold;
+}
+.comment_container .comment_infoBox .user a {
+  position: absolute;
+  right: 0;
+}
+.comment_container .comment_infoBox .comment {
+}
