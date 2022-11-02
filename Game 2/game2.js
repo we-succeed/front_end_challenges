@@ -6,7 +6,7 @@ function jump() {
     character.classList.add("animate");
     setTimeout(function () {
         character.classList.remove("animate");
-    }, 300);
+    }, 400);
 }
 var checkDead = setInterval(function () {
     let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));

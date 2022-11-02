@@ -1,9 +1,10 @@
 /* common css */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 :root {
-  --primary-color: rgb(136, 182, 135);
-  --primary-color-darker: rgb(85, 112, 84);
+  --primary-color: rgb(135, 138, 182);
+  --primary-color-darker: rgb(36, 33, 176);
   --primary-color-warning:rgb(255,0,0);
+  --sub-color:rgb(245, 98, 98);
 }
 * {
   box-sizing: border-box;
@@ -87,6 +88,7 @@ h2{
   margin:0 5px;
   border:none;
   padding:10px;
+  --primary-color-darker: rgb(135, 182, 152);
   background-color: var(--primary-color-darker);
   color:#FFF;
   text-transform:uppercase;
@@ -108,16 +110,6 @@ h2{
   display: inline-block;
   line-height: 40px;
 }
-@keyframes countdown {
-  from {
-    stroke-dashoffset: 500;
-    stroke-dasharray: 500;
-  }
-  to {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 500;
-  }
-}
 svg {
   background-color: transparent;
   position: absolute;
@@ -126,20 +118,22 @@ svg {
   transform: translate(-50%, -50%) rotateZ(-90deg);
 }
 
-svg .circle {
+svg .progress {
   stroke:  var(--primary-color-darker);
   stroke-width: 16;
+  stroke-linecap: round;
   fill: transparent;
-  stroke-dashoffset: 500;
-  stroke-dasharray: 0;
-  animation: 3600s countdown linear;
 }
 svg .base {
   stroke:  #e3e3e3;
   stroke-width: 16;
   fill: transparent;
-  stroke-dashoffset: 500;
-  stroke-dasharray: 0;
+}
+svg .sec {
+  stroke:  var(--sub-color);
+  stroke-width: 5;
+  fill: transparent;
+  stroke-linecap: round;
 }
 
 .timers {
@@ -148,7 +142,6 @@ svg .base {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color:  var(--primary-color-reverse);
-  font-size: 42px;
+  font-size: 20px;
   font-weight: 700;
 }
