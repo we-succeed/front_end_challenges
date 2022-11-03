@@ -29,18 +29,6 @@
 
     // get words
     function getWords() {
-        // axios.get('https://random-word-api.herokuapp.com/all')
-        // .then((res) => {
-        //     res.data.forEach((word) => {
-        //         if (word.length < 7) {
-        //             words.push(word);
-        //         }
-        //         buttonChange('start', 'Easy Mode Start')
-        //     })
-        // }).catch((err) => {
-        //     console.log(err);
-        // })
-
         fetch('https://random-word-api.herokuapp.com/all')
         .then((res) => res.json())
         .then(data => {
@@ -48,7 +36,7 @@
                 if (word.length < 7) {
                     words.push(word);
                 }
-                buttonChange('start', 'Easy Mode Start')
+                btnTextChange('start', 'Easy Mode Start')
             })
         })
         .catch((err) => {
@@ -56,28 +44,22 @@
         })
 
     }
-
-    // check match
-    function checkStatus() {
-        if (!isPlaying && time === 0) {
-            isPlaying = false;
-            buttonChange('start', 'Done');
-            clearInterval(checkInterval)
-        }
-    }
-
     function checkMatch() {
+        if (!isPlaying) {
+            runNotification('error')
+            return
+        }
         if (wordInput.value.toLowerCase() === wordDisplay.innerText.toLowerCase()) {
+            runNotification('success', wordInput.value);
             wordInput.value = "";
-            if (!isPlaying) {
-                runNotification('error')
-                return
-            }
-            score++;
-            scoreDisplay.innerText = score;
+            scoreDisplay.innerText = ++score;
             time=SETTING_TIME;
+<<<<<<< HEAD
             runNotification('success')
             const randomIndex = Math.floor(Math.random() * words.length)
+=======
+            const randomIndex = Math.floor(Math.random() * words.length);
+>>>>>>> 159201abebc0d64d8b00d4e05008c61873badabb
             wordDisplay.innerText = words[randomIndex];
         }
     }
@@ -93,29 +75,30 @@
         time = SETTING_TIME;
         isPlaying = true;
         timeInterval = setInterval(countDown, 1000)
-        checkInterval = setInterval(checkStatus, 50)
-        buttonChange('loading', 'Playing..')
+        btnTextChange('loading', 'Playing..')
     }
 
     function countDown() {
-        time > 0 ? time-- : isPlaying = false;
-        timeDisplay.innerText = time;
-        if (!isPlaying) {
-            clearInterval(timeInterval)
+        if (time <= 0) {
+            isPlaying = false;
+            clearInterval(timeInterval);
+            btnTextChange('start', 'Done');
+        } else {
+            time--;
+            timeDisplay.innerText = time;
         }
-
     }
     
-    function buttonChange(type, text) {
+    function btnTextChange(type, text) {
         button.innerText = text;
         type === 'loading' ? button.classList.add('loading') : button.classList.remove('loading')
     }
 
 
-    function runNotification(type) {
+    function runNotification(type, text) {
         // toastify options
         const option = {
-            text: `${wordDisplay.innerText}!!`,
+            text: `${text}!!`,
             duration: 3000,
             newWindow: true,
             gravity: "top", // `top` or `bottom`

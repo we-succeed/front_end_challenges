@@ -1,9 +1,10 @@
 /* common css */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 :root {
-  --primary-color: rgb(136, 182, 135);
-  --primary-color-darker: rgb(85, 112, 84);
+  --primary-color: rgb(135, 138, 182);
+  --primary-color-darker: rgb(36, 33, 176);
   --primary-color-warning:rgb(255,0,0);
+  --sub-color:rgb(245, 98, 98);
 }
 * {
   box-sizing: border-box;
@@ -87,6 +88,7 @@ h2{
   margin:0 5px;
   border:none;
   padding:10px;
+  --primary-color-darker: rgb(135, 182, 152);
   background-color: var(--primary-color-darker);
   color:#FFF;
   text-transform:uppercase;
@@ -128,7 +130,7 @@ svg .base {
   fill: transparent;
 }
 svg .sec {
-  stroke:  #f56262;
+  stroke:  var(--sub-color);
   stroke-width: 5;
   fill: transparent;
   stroke-linecap: round;
@@ -140,7 +142,6 @@ svg .sec {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color:  var(--primary-color-reverse);
   font-size: 20px;
   font-weight: 700;
 }
