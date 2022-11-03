@@ -4,6 +4,8 @@ var interval;
 var both = 0;
 var counter = 0;
 var currentBlocks = [];
+const score = document.getElementById('score');
+
 
 function moveLeft() {
     var left = parseInt(window.getComputedStyle(character).getPropertyValue("left"));
@@ -56,7 +58,6 @@ var blocks = setInterval(function () {
         currentBlocks.push(counter);
         counter++;
     }
-
     var characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
     var characterLeft = parseInt(window.getComputedStyle(character).getPropertyValue("left"));
     var drop = 0;
@@ -81,6 +82,7 @@ var blocks = setInterval(function () {
             drop++;
             if (iholeLeft <= characterLeft && iholeLeft + 20 >= characterLeft) {
                 drop = 0;
+                addScore(current);
             }
         }
     }
@@ -92,7 +94,9 @@ var blocks = setInterval(function () {
         character.style.top = characterTop - 0.5 + "px";
     }
 }, 1);
-
+const addScore = (current) => {
+    score.innerText  = current - 3;
+}
 const refreshButton = document.querySelector('.reset');
 const refreshPage = function () {
     location.reload();
