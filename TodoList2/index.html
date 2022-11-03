@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TodoList with Pomodoro timer</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoList with Pomodoro timer</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Todo</h1>
-    <input type="text" name="todoInput" placeholder="Add a task "/>
-  <ul>
+  <section>
+    <h2 class="dateTime">2022/11/02</h2>
+    <h1>Today's tasks</h1>
+    <input type="checkbox">focus</input><input type="text" name="todoInput" placeholder="Add a task " />
+  </section>
+  <section>
+    <div>
+      <span>2022/11/01</span>
+    </div>
+    <div>
+      <ul>
         <li><span>Studying HTML</span>23:49<button type="button">parse</button></li>
-        <li><span>Studying HTML</span>00:00<button type="button">Restart</button></li>
+        <li><span style="text-decoration: line-through;">Studying HTML</span><span>00:00</span><button type="button">Restart</button></li>
         <li>
-          <span>Studying HTML</span>
-          <button type="button">Start</button>
-
+          <span>Studying HTML</span><button type="button">Start</button>
         </li>
-  </ul>
-<script type="text/javascript" src="script.js"></script>
+      </ul>
+    </div>
+  </section>
+  <script type="text/javascript" src="script.js"></script>
 </body>
-
 </html>
