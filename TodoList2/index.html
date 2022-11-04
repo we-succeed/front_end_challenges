@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,26 +8,52 @@
   <title>TodoList with Pomodoro timer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <section>
-    <h2 class="dateTime">2022/11/02</h2>
+  <section  class="input-box">
+    <h2 class="day">2022/11/02</h2>
     <h1>Today's tasks</h1>
-    <input type="checkbox">focus</input><input type="text" name="todoInput" placeholder="Add a task " />
-  </section>
-  <section>
     <div>
-      <span>2022/11/01</span>
+      <div class="check-group">
+        <input type="checkbox" id="focus">
+        <label for="focus" class="selected">FOCUS</label>
+      </div>
+      <input type="text" name="todoInput" placeholder="Add a task " />
     </div>
+  </section>
+  <section class="content-box">
+    <p class="daily">
+      2022/11/01
+    </p>
     <div>
       <ul>
-        <li><span>Studying HTML</span>23:49<button type="button">parse</button></li>
-        <li><span style="text-decoration: line-through;">Studying HTML</span><span>00:00</span><button type="button">Restart</button></li>
         <li>
-          <span>Studying HTML</span><button type="button">Start</button>
+          <div class="grid-container">
+            <div class="grid-time1">
+              <input type="checkbox" id='item1' />
+            </div>
+            <div class="grid-time2">
+              <span class="time">
+                <i class="fa-solid fa-clock">23:49</i>
+                <i class="fa-solid fa-play"></i>
+                <i class="fa-solid fa-pause"></i>
+              </span>
+            </div>
+            <div class="grid-time3">
+              Studying ITEMStudying ITEMStudying ITEMStudying ITEMStudying ITEMStudying ITEMStudying ITEMStudying
+              ITEMStudying ITEMStudying ITEMStudying
+            </div>
+            <div class="grid-time4">
+              <span>
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
   </section>
   <script type="text/javascript" src="script.js"></script>
 </body>
+
 </html>
