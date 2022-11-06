@@ -5,9 +5,9 @@ let iconPlayBack = ['fa-play', 'fa-pause'];
 
 // 1. Setting up the day
 const getDay = () => {
-    let year = new Date().getUTCFullYear();
-    let month = new Date().getUTCMonth().toString().padStart(2,0);
-    let day = new Date().getUTCDay().toString().padStart(2,0);
+    let year = new Date().getFullYear();
+    let month = (new Date().getMonth()+1).toString().padStart(2,0);
+    let day = new Date().getDay().toString().padStart(2,0);
     document.querySelector('.day').textContent = `${year}/${month}/${day}`;
 }
 getDay();
@@ -16,21 +16,33 @@ const getData = () => {
     window.localStorage.getData();
 }
 const initData = () => {
-    todo.map((idx,item) => {
-
-
+    todo.map((item, idx) => {
+        console.log(item,idx);
     })
 }
 initData();
-const createContextBox = (idx, item) => {
+const createContextBox = (item, idx) => {
     let section = document.createElement('section');
-    let daily = document.createElement('p');
-    let contentDiv = document.createElement('div');
-    let ul = document.createElement('ul');
     section.classList.add('content-box');
+    section.setAttribute('id', `content-box-${idx}`);
+    
+    let daily = document.createElement('p');
+    daily.classList.add('daily');
+    daily.innerText = item.date;
     section.appendChild(daily);
-    section.append(contentDiv)
+}
+const createTask = (item) => {
+    let grids = ['grid-item1', 'grid-item2','grid-item3','grid-item4'];
+    let ul = document.createElement('ul');
     let li = document.createElement('li');
+    li.classList.add('grid-container');
+    grids.map(item => {
+        let  gridDiv = document.createElement('div');
+        gridDiv.classList.add(item)
+    })
+}
+const todoContent = () => {
+
 }
 const focusMode = () => {
     modifyGridTemplateArea();
@@ -79,7 +91,6 @@ inputTask.addEventListener('keyup', (e) => {
         if (focused)
             focusMode();
         todo.tasks.push({'focus':focused, 'task':inputTask.textContent});
-        console.log(todo.tasks);
     }
 });
 
