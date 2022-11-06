@@ -54,7 +54,12 @@
             wordInput.value = "";
             scoreDisplay.innerText = ++score;
             time=SETTING_TIME;
+<<<<<<< HEAD
+            runNotification('success')
+            const randomIndex = Math.floor(Math.random() * words.length)
+=======
             const randomIndex = Math.floor(Math.random() * words.length);
+>>>>>>> 159201abebc0d64d8b00d4e05008c61873badabb
             wordDisplay.innerText = words[randomIndex];
         }
     }
@@ -105,8 +110,4 @@
             option.position = 'right'
             option.backgroundColor = 'red'
         }
-
         Toastify(option).showToast();}
-
-
-

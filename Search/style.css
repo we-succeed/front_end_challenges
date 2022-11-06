@@ -1,17 +1,15 @@
 html {
-  box-sizing: border-box;
   background-color: #f8d9d7;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
 }
+
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
 .search_form {
   max-width: 500px;
   margin: 50px auto;
@@ -59,4 +57,7 @@ html {
 
 .lists li .highlight {
   background-color: #DE413A;
+  color: white;
+  /* padding: 0 .2rem; */
+  text-transform: uppercase;
 }

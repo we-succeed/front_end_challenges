@@ -1,25 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TodoList with Pomodoro timer</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>Todo</h1>
-    <input type="text" name="todoInput" placeholder="Add a task "/>
-  <ul>
-        <li><span>Studying HTML</span>23:49<button type="button">parse</button></li>
-        <li><span>Studying HTML</span>00:00<button type="button">Restart</button></li>
-        <li>
-          <span>Studying HTML</span>
-          <button type="button">Start</button>
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TodoList with Pomodoro timer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <section  class="input-box">
+    <h2 class="day"></h2>
+    <h1>Today's tasks</h1>
+    <div>
+      <div class="check-group">
+        <input type="checkbox" id="focus">
+        <label for="focus">FOCUS | </label>
+      </div>
+      <input type="text" name="todoInput" placeholder="Add a task "/>
+    </div>
+  </section>
+  <section class="content-box">
+    <p class="daily">
+      2022/11/01
+    </p>
+      <ul>
+        <li  class="grid-container">
+            <div class="grid-item1">
+              <input type="checkbox"/>
+            </div>
+            <div class="grid-item2">
+            </div>
+            <div class="grid-item3">
+            </div>
+            <div class="grid-item4">
+              <span>
+                <i class="fa-solid fa-xmark"></i>
+              </span>
+            </div>
         </li>
-  </ul>
-<script type="text/javascript" src="script.js"></script>
+      </ul>
+  </section>
+  <script type="text/javascript" src="script.js"></script>
 </body>
 
 </html>

@@ -12,7 +12,6 @@ fetching();
 
 const findMatches = (regex) => {
   return canada.filter(location => {
-    
     // regex can't accept dynamic value. Use new RegExp
     
     return location[0].match(regex) || location[1].match(regex);
@@ -27,6 +26,7 @@ const displayLists = (e) => {
   }
   const input = e.target.value;
   const regex = new RegExp(input, "gi");
+
   const filteredLocations = findMatches(regex);
 
   const newLists = filteredLocations.map(location => {
@@ -36,13 +36,11 @@ const displayLists = (e) => {
     const stateName = location[1].replace(regex, `
     <span class="highlight">${input}</span>
     `)
-    
     return `
       <li>
       <span class="name">${cityName}, ${stateName}</span>
       </li>
     `
-
   }).join("");
   lists.innerHTML = newLists;
 };
