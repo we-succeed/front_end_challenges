@@ -1,43 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Convertyer</title>
     <link rel="stylesheet" href="style.css">
+
 </head>
-
 <body>
-    <div class="exchange-box">
-        <div class="dropdown">
-            <button class="dropbtn" id="from-button">USD</button>
-            <div class="dropdown-content" id="from-currency-list">
-                <a href="#">USD</a>
-                <a href="#">KRW</a>
-                <a href="#">VND</a>
+    <div class="container">
+        <div class="header">
+          <h1>Currency Converter</h1>
+        </div>
+        <div class="date">2022-11-06</div>
+        <ul class="currencies">
+          <li class="currency base-currency" id="USD">
+            <img src="https://flagcdn.com/h80/us.png" class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#36;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">USD - US Dollar</p>
+              <p class="base-currency-rate">1 USD = 1 USD</p>
             </div>
-        </div>
-        <div class="input-area">
-            <input type="number" id="from-input" onkeyup="convert()" />
-            <div>$</div>
-        </div>
-    </div>
-    <h1>=</h1>
-    <div class="exchange-box">
-        <div class="dropdown">
-            <button class="dropbtn" id="to-button">USD</button>
-            <div class="dropdown-content" id="to-currency-list">
-                <a href="#">USD</a>
-                <a href="#">KRW</a>
-                <a href="#">VND</a>
+            <span class="close">&times;</span>
+          </li>
+          <li class="currency" id="CAD">
+            <img src="https://flagcdn.com/h80/ca.png" class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#36;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">CAD - Canadian Dollar</p>
+              <p class="base-currency-rate">1 USD = 1.35 CAD</p>
             </div>
+            <span class="close">&times;</span>
+          </li>
+          <li class="currency" id="KOR">
+            <img src="https://flagcdn.com/h80/kr.png" class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#65510;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">KRW - Korean Won</p>
+              <p class="base-currency-rate">1 USD = 1,404.11 KRW</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+          <li class="currency" id="CNY">
+            <img src="https://flagcdn.com/h80/cn.jpg" class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#65509;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">CNY - Chinese Yuan</p>
+              <p class="base-currency-rate">1 USD = 7.18 CNY</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+          <li class="currency" id="EUR">
+            <img src="https://flagcdn.com/h80/eu.png" class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#8364;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">EUR - Euro</p>
+              <p class="base-currency-rate">1 USD = 1 EUR</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+          <li class="currency" id="JPY">
+            <img src="https://flagcdn.com/h80/jp.jpg" class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#65509;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">JPY - Japanese Yen</p>
+              <p class="base-currency-rate">1 USD = 146.6 JPY</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+          <li class="currency" id="TWD">
+            <img src="https://flagcdn.com/w80/tw.jpg" class="flag">
+            <div class="info">
+              <p class="input"><span class="currency-symbol">&#36;</span><input placeholder="0.0000"></p>
+              <p class="currency-name">TWD - New Taiwan Dollar</p>
+              <p class="base-currency-rate">1 USD = 32.01 TWD</p>
+            </div>
+            <span class="close">&times;</span>
+          </li>
+        </ul>
+        <button class="add-currency-btn"><i class='fas fa-angle-left'></i> Add Currency</button>
+        <ul class="add-currency-list">
+          <li data-currency="USD" class="disabled"><img src="https://flagcdn.com/h80/us.png" class="flag"><span>USD - US Dollar</span></li>
+          <li data-currency="CAD"><img src="https://flagcdn.com/h80/ca.png" class="flag"><span>CAD - Canadian Dollar</span></li>
+          <li data-currency="CAD"><img src="https://flagcdn.com/h80/kr.png" class="flag"><span>KRW - Korean Won</span></li>
+          <li data-currency="CAD"><img src="https://flagcdn.com/h80/cn.jpg" class="flag"><span>CNY - Chinese Yuan</span></li>
+        </ul>
         </div>
-        <div class="input-area">
-            <input type="number" id="to-input" />
-            <div>$</div>
-        </div>
-    </div>
+      <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
-
 </html>
+
