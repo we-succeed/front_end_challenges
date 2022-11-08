@@ -13,13 +13,13 @@ html {
 }
 
 #main {
-  width: 100%;
+  width: 100vw;
   padding: 0 1rem;
 }
 
 h2 {
   width: 100%;
-  margin: auto;
+  margin: 2rem auto;
 }
 
 .comments_container {
@@ -69,5 +69,11 @@ h2 {
   position: absolute;
   right: 0;
 }
-.comment_container .comment_infoBox .comment {
+
+#loading {
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
 }
