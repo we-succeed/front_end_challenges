@@ -91,27 +91,18 @@ h2.day {
 .fa-clock::before {
     margin-right: 3px;
 }
-
-.content-box ul {
-    padding: 0px;
-}
-
-.content-box ul li {
-    list-style: none;
-    background-color: rgba(255, 255, 255, 0.637);
-    margin-bottom: 3%;
-    border-radius: 5px;
-}
-
 .grid-container {
     display: grid;
+    padding: 10px 0px;
+    background-color: rgba(255, 255, 255, 0.637);
+    border-radius: 5px;
     grid-template-columns: 5% auto 5%;
     grid-template-rows: minmax(0, 1fr) auto;
     grid-template-areas:
         'grid-check-zone grid-content-zone grid-close-zone'
         'grid-check-zone grid-content-zone grid-close-zone';
     gap: 10px;
-    padding: 10px 0px;
+    margin: 10px 0px;
 }
 
 .grid-item1 {

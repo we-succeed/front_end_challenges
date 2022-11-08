@@ -1,60 +1,62 @@
 //default data
-let todos = [{'date':'2022/11/01', tasks:[{ 'focus': true, 'task': '11111', 'completed':true},{ 'focus': false, 'task': '2222', 'completed':true }]}
-,{'date':'2022/11/02', tasks:[{ 'focus': true, 'task': '3333' , 'completed':false},{ 'focus': false, 'task': '4444', 'completed':false }]}];
+let todos = [
+    { 'date': '2022/11/02', 
+        tasks: [
+            { 'focus': true, 'task': '3333', 'completed': false }, 
+            { 'focus': false, 'task': '4444', 'completed': false }]
+    },
+    {
+        'date': '2022/11/01', 
+        tasks: [
+            { 'focus': true, 'task': '11111', 'completed': true },
+            { 'focus': false, 'task': '2222', 'completed': true }]
+    }
+];
 let iconPlayBack = ['fa-play', 'fa-pause'];
 
 // 1. Setting up the day
-const getDay = () => {
+const getDate = () => {
     let year = new Date().getFullYear();
-    let month = (new Date().getUTCMonth()+1).toString().padStart(2,0);
-    let day = new Date().getUTCDate().toString().padStart(2,0);
+    let month = (new Date().getUTCMonth() + 1).toString().padStart(2, 0);
+    let day = new Date().getUTCDate().toString().padStart(2, 0);
     return `${year}/${month}/${day}`;
-
-}
-document.querySelector('.day').textContent = getDay();
-const getData = () => {
-    window.localStorage.getData();
 }
 //Section contextBox
-let TodoSectionContextBox = (item, pid) => {
+let TodoSectionContextBox = (todo, pid) => {
     let section = document.createElement('section');
     section.classList.add('content-box');
     section.setAttribute('id', `content-box-${pid}`);
 
     let daily = document.createElement('p');
     daily.classList.add('daily');
-    daily.innerText = (item.date) ? item.date : getDay();
+    daily.innerText = (todo.date) ? todo.date : getDate();
     section.appendChild(daily);
-
-    let ul = document.createElement('ul');
-    section.appendChild(ul);
     return section;
 }
-//task component
-const TodoLi = (item, pid, idx) => {
-    console.log(item);
-    let li = document.createElement('li');
-    li.classList.add('grid-container');
-    li.setAttribute('id', `grid-container-${pid}-${idx}`);
-    let grids = ['grid-item1', 'grid-item2','grid-item3','grid-item4'];
-    grids.map(gridItem=> {
-        let  gridDiv = document.createElement('div');
+//Task component
+const TodoTaskComponent = (item, pid, idx) => {
+    let div = document.createElement('div');
+    div.classList.add('grid-container');
+    div.setAttribute('id', `grid-container-${pid}-${idx}`);
+    let grids = ['grid-item1', 'grid-item2', 'grid-item3', 'grid-item4'];
+    grids.map(gridItem => {
+        let gridDiv = document.createElement('div');
         gridDiv.classList.add(gridItem);
-        if(gridItem === 'grid-item1') 
-            gridDiv.appendChild(TodoInputCheckbox(pid,idx));
-        else if(gridItem === 'grid-item2') {
-            if(item.focus) {
-                modifyGridTemplateArea(li);
+        if (gridItem === 'grid-item1')
+            gridDiv.appendChild(TodoInputCheckbox(pid, idx));
+        else if (gridItem === 'grid-item2') {
+            if (item.focus) {
+                modifyGridTemplateArea(div);
                 TodoFocusMode(gridDiv);
             }
         }
-        else if(gridItem === 'grid-item3')
+        else if (gridItem === 'grid-item3')
             gridDiv.innerText = item.task;
         else
             gridDiv.appendChild(DeleteButton(pid, idx));
-        li.appendChild(gridDiv);
+        div.appendChild(gridDiv);
     });
-    return li
+    return div
 }
 const TodoInputCheckbox = (pid, id) => {
     let checkbox = document.createElement('input');
@@ -97,53 +99,58 @@ const TodoFocusMode = (focusArea) => {
     focusArea.appendChild(playSpan);
     focusArea.style.display = 'inline-flex';
 }
-//modified grid template area
+//Modify grid template area
 const modifyGridTemplateArea = (el) => {
     let grid = el;
     grid.style.gridTemplateAreas = "'grid-check-zone grid-time-zone grid-close-zone' 'grid-check-zone grid-content-zone grid-close-zone'"
 }
 
 //TodoList functions
-const inputTask = document.querySelector('input[type="text"]');
-const btnFocus = document.querySelector('#focus');
-let currentTodo = {'daily': getDay(), tasks:[]}
-let focused = false;
-let currentSection = TodoSectionContextBox(currentTodo, todos.length + 1);
-document.body.appendChild(currentSection);
 
-if (currentTodo.tasks.length === 0) {
-    currentSection.style.display='none';
-}
-inputTask.addEventListener('keyup', (e) => {
-    if (e.keyCode === 13) {
-        currentSection.style.display='block';
-        let obj = {
-            'focus': focused,
-            task: e.target.value
-        }
-        currentTodo.tasks.push(obj);
-        let ul = document.querySelector(`#content-box-${todos.length + 1}`).querySelector('ul');
-        ul.appendChild(TodoLi(obj,todos.length + 1, currentTodo.tasks.length));
+(() => {
+    let focused = false;
+    let currentTodo
+    let currentSection
+    //Set up the currentTodo  & currentSection
+    currentTodo = todos.filter(todo => todo.date === getDate())[0]
+    if (!currentTodo) {
+        currentTodo = { 'daily': getDate(), tasks: [] }
+        currentSection = TodoSectionContextBox(currentTodo, todos.length);
+        document.body.appendChild(currentSection);
     }
-});
-btnFocus.addEventListener('click', (e) => {
-   focused = e. target.checked;
-   if(focused) 
-    e. target.labels[0].classList.add('selected');
-   else
-    e. target.labels[0].classList.remove('selected');
-})
-
-const initData = () => {
+    if (currentTodo.tasks.length === 0) {
+        currentSection.style.display = 'none';
+    }
     //previous todoList UI from local storage data;
     todos.map((todo, pId) => {
         let section = TodoSectionContextBox(todo, pId);
-        document.body.appendChild(section);
-        let ul = document.querySelector(`#content-box-${pId}`).querySelector('ul');
         todo.tasks.map((task, idx) => {
-            ul.appendChild(TodoLi(task,pId,idx));
+            section.appendChild(TodoTaskComponent(task, pId, idx));
         });
+        document.body.appendChild(section);
+        if(todo.date === getDate())
+            currentSection = section;
     });
-    
-}
-initData();
+    document.querySelector('.day').textContent = getDate();
+    const inputTask = document.querySelector('input[type="text"]');
+    const btnFocus = document.querySelector('#focus');
+    inputTask.addEventListener('keyup', (e) => {
+        if (e.keyCode === 13) {
+            currentSection.style.display = 'block';
+            let obj = {
+                'focus': focused,
+                task: e.target.value
+            }
+            currentTodo.tasks.push(obj);
+            currentSection.appendChild(TodoTaskComponent(obj, todos.length, currentTodo.tasks.length))
+            e.target.value = "";
+        }
+    });
+    btnFocus.addEventListener('click', (e) => {
+        focused = e.target.checked;
+        if (focused)
+            e.target.labels[0].classList.add('selected');
+        else
+            e.target.labels[0].classList.remove('selected');
+    })
+})();
