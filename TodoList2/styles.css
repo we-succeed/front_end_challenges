@@ -124,9 +124,17 @@ h2.day {
 .grid-item3 {
     grid-area: grid-content-zone;
 }
+.completed{
+    text-decoration: line-through;
+}
 
 .grid-item4 {
     grid-area: grid-close-zone;
+}
+.grid-item4 span{
+    display: block;
+    float: right;
+    margin-right: 15px;
 }
 
 i.fa-play,
