@@ -1,19 +1,5 @@
 //default data
-let todos = [
-    { id:'20221102', 'date': '2022/11/02', 
-        tasks: [
-            { id:'2022110200', 'focus': true, 'task': '3333', 'completed': false }, 
-            { id:'2022110201','focus': false, 'task': '4444', 'completed': false }]
-    },
-    {  id:'20221101',
-        'date': '2022/11/01', 
-        tasks: [
-            {id:'2022110100', 'focus': true, 'task': '11111', 'completed': true },
-            {id:'2022110101', 'focus': false, 'task': '2222', 'completed': true }]
-    }
-];
-let iconPlayBack = ['fa-play', 'fa-pause'];
-
+let todos = [];
 // 1. Setting up the day
 const getDate = () => {
     let year = new Date().getFullYear();
@@ -22,13 +8,17 @@ const getDate = () => {
     return `${year}/${month}/${day}`;
 }
 const generateId = () => {
-    return getDate().replaceAll('/','');
+    return getDate().replaceAll('/', '');
 }
 /* UI component 
 * 1. TodoSectionContextBox
-* 2. TodoTaskComponent
+* 2. TodoCheckBox
 * 3. TodoFocusMode
-*/ 
+* 4. TodoTask
+* 5. TodoDelButton
+* 6. TodoTaskComponent
+* 7. TodoFocusMode
+*/
 let TodoSectionContextBox = (todo) => {
     let section = document.createElement('section');
     section.classList.add('content-box');
@@ -41,16 +31,18 @@ let TodoSectionContextBox = (todo) => {
     return section;
 }
 
-let TodoCheckbox = (item) => {
+let TodoCheckBox = (item) => {
     let checkbox = document.createElement('input');
     checkbox.setAttribute('type', 'checkbox');
     checkbox.setAttribute('id', `chk-${item.id}`);
     if (item.completed) {
         checkbox.setAttribute('checked', true);
-    } 
-    if (item.id.slice(0,8) !== generateId()) {
-        checkbox.setAttribute('disabled', true);
     }
+    //Check the currentTodo
+    if (item.id.slice(0, 8) !== generateId())
+        checkbox.setAttribute('disabled', true);
+    
+    //Checkbox EventListener     
     checkbox.addEventListener('click', (e) => {
         let task = document.querySelector(`#task-${item.id}`);
         if (e.target.checked) {
@@ -66,43 +58,55 @@ let TodoTask = (item) => {
     span.setAttribute('id', `task-${item.id}`);
     span.style.cursor = 'pointer';
     span.innerText = item.task;
-    if (item.completed) 
+    if (item.completed)
         span.classList.add('completed');
     else
         span.classList.remove('completed');
-    
-    //Add event Listener
-    if (item.id.slice(0,8) === generateId()) {
+
+    //Check the currentTodo
+    if (item.id.slice(0, 8) === generateId()) {
         span.addEventListener('click', () => {
-            let taskchk = document.querySelector(`#chk-${item.id}`);
             item.completed = !(item.completed);
-            if (item.completed) {
-                taskchk.checked = true;
-                span.classList.add('completed');
-            } else {
-                taskchk.checked = false;
-                span.classList.remove('completed');
-            }
+            todoCompleted(item);
         })
-    } 
+    }
     return span
+}
+const todoCompleted = (item) => {
+    if (item.completed) {
+        document.querySelector(`#chk-${item.id}`).checked = true;
+        document.querySelector(`#task-${item.id}`).classList.add('completed');
+        document.querySelector(`#grid-container-${item.id} .grid-item2`).classList.add('time-completed');
+    } else {
+        document.querySelector(`#chk-${item.id}`).checked = false;
+        document.querySelector(`#task-${item.id}`).classList.remove('completed');
+        document.querySelector(`#grid-container-${item.id} .grid-item2`).classList.remove('time-completed');
+    }
+}
+const timeCompleted = (focusArea, playIcon, pauseIcon, timeIcon) => {
+    focusArea.classList.add('time-completed');
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'none';
+    timeIcon.classList.add('without-after-element');
 }
 //DelButton
 const TodoDelButton = (item) => {
     let span = document.createElement('span');
-    let i = document.createElement('i');
-    i.classList.add('fa-solid', 'fa-xmark');
-    i.setAttribute('id', `del-${item.id}`);
-    span.style.cursor = 'pointer';
     //Add event Listener
-    if (item.id.slice(0,8) === generateId()) {
+    if (item.id.slice(0, 8) === generateId()) {
+        let i = document.createElement('i');
+        i.classList.add('fa-solid', 'fa-xmark');
+        i.setAttribute('id', `del-${item.id}`);
+        span.style.cursor = 'pointer';
         span.addEventListener('click', () => {
             arrIdx = currentTodo.tasks.findIndex((x) => x.id === item.id);
             currentTodo.tasks.splice(arrIdx, 1);
             document.getElementById(`grid-container-${item.id}`).remove();
+            if (currentTodo.tasks.length === 0)
+                document.getElementById(`content-box-${item.id.slice(0, 8)}`).style.display = 'none';
         })
+        span.appendChild(i);
     }
-    span.appendChild(i);
     return span
 }
 //Task component
@@ -115,66 +119,99 @@ const TodoTaskComponent = (item) => {
         let gridDiv = document.createElement('div');
         gridDiv.classList.add(gridItem);
         if (gridItem === 'grid-item1') {
-            gridDiv.appendChild(TodoCheckbox(item));
-        }
-        else if (gridItem === 'grid-item2') {
+            gridDiv.appendChild(TodoCheckBox(item));
+        } else if (gridItem === 'grid-item2') {
             if (item.focus) {
                 modifyGridTemplateArea(div);
-                TodoFocusMode(gridDiv);
+                TodoFocusMode(gridDiv, item);
             }
-        }
-        else if (gridItem === 'grid-item3') {
+        } else if (gridItem === 'grid-item3') {
             gridDiv.appendChild(TodoTask(item));
         }
-        else{
+        else {
             gridDiv.appendChild(TodoDelButton(item));
         }
         div.appendChild(gridDiv);
     });
     return div
 }
-const TodoFocusMode = (focusArea) => {
+//FocusMode Component
+const TodoFocusMode = (focusArea, item) => {
+    var sec = 1500;
     //create an Icon element
     const timeIcon = document.createElement("i");
     timeIcon.classList.add('fa-solid', 'fa-clock');
-    timeIcon.textContent = "25:00";
+    timeIcon.textContent = '25:00';
 
     //create an span element
     const timeSpan = document.createElement("span");
     timeSpan.appendChild(timeIcon);
     timeSpan.classList.add('time');
 
-    //create an play-group span element
+    //create an play icon
     const playSpan = document.createElement("span");
     playSpan.classList.add('play-group');
 
-    //and give it icon
-    iconPlayBack.map((ico) => {
-        let playIcon = document.createElement('i');
-        playIcon.classList.add('fa-solid', ico);
-        playSpan.appendChild(playIcon);
+    let playIcon = document.createElement('i');
+    playIcon.classList.add('fa-solid', 'fa-play');
+
+    let pauseIcon = document.createElement('i');
+    pauseIcon.classList.add('fa-solid', 'fa-pause');
+    pauseIcon.style.display = 'none';
+
+    playSpan.appendChild(playIcon);
+    playSpan.appendChild(pauseIcon);
+
+    playIcon.addEventListener('click', () => {
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+        window['count' + item.id] = setInterval(function () {
+            //Change todo status to completed
+            if (sec <= 0) { 
+                item.completed = true;
+                clearInterval(eval('count' + item.id));
+                timeCompleted(focusArea, playIcon, pauseIcon, timeIcon);
+                todoCompleted(item.id);
+            } else {
+                --sec;
+                let mins = Math.floor(sec / 60).toString().padStart(2, '0');
+                let modSec = Math.floor(sec % 60).toString().padStart(2, '0');
+                timeIcon.textContent = `${mins}:${modSec}`;
+            }
+        }, 1000);
+    })
+    pauseIcon.classList.add('fa-solid', 'fa-pause');
+    pauseIcon.addEventListener('click', () => {
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+        clearInterval(eval('count' + item.id));
     });
 
+    if (item.id.slice(0, 8) !== generateId())
+        timeCompleted(focusArea, playIcon, pauseIcon, timeIcon);
     //Added time-group and play-group
     focusArea.appendChild(timeSpan);
     focusArea.appendChild(playSpan);
     focusArea.style.display = 'inline-flex';
+
 }
 //Modify grid template area
 const modifyGridTemplateArea = (el) => {
     let grid = el;
     grid.style.gridTemplateAreas = "'grid-check-zone grid-time-zone grid-close-zone' 'grid-check-zone grid-content-zone grid-close-zone'"
 }
+
 var currentTodo
+
 (() => {
     document.querySelector('.day').textContent = getDate();
     let focused = false;
     let currentSection
-    // let todos = JSON.parse(localStorage.getItem('todos'));
+    let todos = JSON.parse(localStorage.getItem('todos'));
     //Set up the currentTodo  & currentSection
     currentTodo = todos.filter(todo => todo.date === getDate())[0]
     if (!currentTodo) {
-        currentTodo = {'id':generateId(), 'date': getDate(), tasks: [] }
+        currentTodo = { 'id': generateId(), 'date': getDate(), tasks: [] }
         currentSection = TodoSectionContextBox(currentTodo);
         document.body.appendChild(currentSection);
     }
@@ -187,7 +224,7 @@ var currentTodo
         todo.tasks.map((task) => {
             section.appendChild(TodoTaskComponent(task));
         });
-        if(todo.date === getDate())
+        if (todo.date === getDate())
             currentSection = section;
         document.body.appendChild(section);
     });
@@ -197,16 +234,17 @@ var currentTodo
     const btnSave = document.querySelector('#save');
 
     inputTask.addEventListener('keyup', (e) => {
+        if  (e.target.value === '') return;
         if (e.keyCode === 13) {
             currentSection.style.display = 'block';
             let currentTask = {
-                'id': generateId() + currentTodo.tasks.length.toString().padStart(2,'0'),
+                'id': generateId() + currentTodo.tasks.length.toString().padStart(2, '0'),
                 'focus': focused,
-                task: e.target.value
+                'task': e.target.value,
+                'completed': false
             }
-            currentTodo.tasks.push(currentTask);
-            const task = TodoTaskComponent(currentTask);
-            currentSection.appendChild(task)
+            currentTodo.tasks.unshift(currentTask);
+            currentSection.appendChild(TodoTaskComponent(currentTask))
             e.target.value = "";
         }
     });
@@ -218,10 +256,22 @@ var currentTodo
         else
             e.target.labels[0].classList.remove('selected');
     });
+    btnFocus.addEventListener('keyup', () => {
+        if  (inputTask.value === '')
+            inputTask.focus();
+    })
 
     btnSave.addEventListener('click', () => {
-        todos.push(currentTodo);
-        localStorage.setItem('todos',  JSON.stringify(todos));
+        if (todos.filter((todo) => todo.id === currentTodo.id).length === 0) {
+            todos.push(currentTodo);
+        } else {
+            if (todos.length > 6)
+                todos.shift();
+            todos.filter((todo) => todo.id === currentTodo.id)
+                .map((t) => { t = currentTodo;})
+        }
+        if (localStorage.getItem('todos'))
+            localStorage.remove('todos');
+        localStorage.setItem('todos', JSON.stringify(todos));
     })
 })();
-
