@@ -41,7 +41,7 @@ let TodoCheckBox = (item) => {
     //Check the currentTodo
     if (item.id.slice(0, 8) !== generateId())
         checkbox.setAttribute('disabled', true);
-    
+
     //Checkbox EventListener     
     checkbox.addEventListener('click', (e) => {
         let task = document.querySelector(`#task-${item.id}`);
@@ -66,29 +66,20 @@ let TodoTask = (item) => {
     //Check the currentTodo
     if (item.id.slice(0, 8) === generateId()) {
         span.addEventListener('click', () => {
+            let playIcon = document.querySelector(`#grid-container-${item.id} .play-group .fa-play`);
+            let pauseIcon = document.querySelector(`#grid-container-${item.id} .play-group .fa-pause`);
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+
             item.completed = !(item.completed);
             todoCompleted(item);
+            if (eval('count' + item.id))
+                clearInterval(eval('count' + item.id));
         })
     }
     return span
 }
-const todoCompleted = (item) => {
-    if (item.completed) {
-        document.querySelector(`#chk-${item.id}`).checked = true;
-        document.querySelector(`#task-${item.id}`).classList.add('completed');
-        document.querySelector(`#grid-container-${item.id} .grid-item2`).classList.add('time-completed');
-    } else {
-        document.querySelector(`#chk-${item.id}`).checked = false;
-        document.querySelector(`#task-${item.id}`).classList.remove('completed');
-        document.querySelector(`#grid-container-${item.id} .grid-item2`).classList.remove('time-completed');
-    }
-}
-const timeCompleted = (focusArea, playIcon, pauseIcon, timeIcon) => {
-    focusArea.classList.add('time-completed');
-    playIcon.style.display = 'none';
-    pauseIcon.style.display = 'none';
-    timeIcon.classList.add('without-after-element');
-}
+
 //DelButton
 const TodoDelButton = (item) => {
     let span = document.createElement('span');
@@ -167,7 +158,7 @@ const TodoFocusMode = (focusArea, item) => {
         pauseIcon.style.display = 'block';
         window['count' + item.id] = setInterval(function () {
             //Change todo status to completed
-            if (sec <= 0) { 
+            if (sec <= 0) {
                 item.completed = true;
                 clearInterval(eval('count' + item.id));
                 timeCompleted(focusArea, playIcon, pauseIcon, timeIcon);
@@ -195,11 +186,31 @@ const TodoFocusMode = (focusArea, item) => {
     focusArea.style.display = 'inline-flex';
 
 }
+const todoCompleted = (item) => {
+    if (item.completed) {
+        document.querySelector(`#chk-${item.id}`).checked = true;
+        document.querySelector(`#task-${item.id}`).classList.add('completed');
+        document.querySelector(`#grid-container-${item.id} .grid-item2`).classList.add('time-completed');
+    } else {
+        document.querySelector(`#chk-${item.id}`).checked = false;
+        document.querySelector(`#task-${item.id}`).classList.remove('completed');
+        document.querySelector(`#grid-container-${item.id} .grid-item2`).classList.remove('time-completed');
+    }
+}
+const timeCompleted = (focusArea, playIcon, pauseIcon, timeIcon) => {
+    focusArea.classList.add('time-completed');
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'none';
+    timeIcon.classList.add('without-after-element');
+}
 //Modify grid template area
 const modifyGridTemplateArea = (el) => {
     let grid = el;
     grid.style.gridTemplateAreas = "'grid-check-zone grid-time-zone grid-close-zone' 'grid-check-zone grid-content-zone grid-close-zone'"
 }
+
+
+
 
 var currentTodo
 
@@ -209,7 +220,10 @@ var currentTodo
     let currentSection
     let todos = JSON.parse(localStorage.getItem('todos'));
     //Set up the currentTodo  & currentSection
-    currentTodo = todos.filter(todo => todo.date === getDate())[0]
+    if (todos !== null) {
+        currentTodo = todos.filter(todo => todo.date === getDate())[0]
+    }
+
     if (!currentTodo) {
         currentTodo = { 'id': generateId(), 'date': getDate(), tasks: [] }
         currentSection = TodoSectionContextBox(currentTodo);
@@ -219,7 +233,7 @@ var currentTodo
         currentSection.style.display = 'none';
     }
     //previous todoList UI from local storage data;
-    todos.map((todo) => {
+    todos && todos.map((todo) => {
         let section = TodoSectionContextBox(todo);
         todo.tasks.map((task) => {
             section.appendChild(TodoTaskComponent(task));
@@ -229,12 +243,13 @@ var currentTodo
         document.body.appendChild(section);
     });
 
+    //Todo Task Main Features
     const inputTask = document.querySelector('input[type="text"]');
     const btnFocus = document.querySelector('#focus');
     const btnSave = document.querySelector('#save');
 
     inputTask.addEventListener('keyup', (e) => {
-        if  (e.target.value === '') return;
+        if (e.target.value === '') return;
         if (e.keyCode === 13) {
             currentSection.style.display = 'block';
             let currentTask = {
@@ -257,7 +272,7 @@ var currentTodo
             e.target.labels[0].classList.remove('selected');
     });
     btnFocus.addEventListener('keyup', () => {
-        if  (inputTask.value === '')
+        if (inputTask.value === '')
             inputTask.focus();
     })
 
@@ -268,7 +283,7 @@ var currentTodo
             if (todos.length > 6)
                 todos.shift();
             todos.filter((todo) => todo.id === currentTodo.id)
-                .map((t) => { t = currentTodo;})
+                .map((t) => { t = currentTodo; })
         }
         if (localStorage.getItem('todos'))
             localStorage.remove('todos');
