@@ -2,12 +2,13 @@
    margin: 0;
    padding: 0;
 }
+
 :root {
-   --facebook : #3b5998;
+   --facebook: #3b5998;
 }
 
 .wrap-all {
-   display:flex;
+   display: flex;
    justify-content: center;
    align-items: center;
    flex-direction: column;
@@ -18,19 +19,23 @@
    margin-top: 2rem;
    color: var(--facebook);
 }
+
 ul {
    margin-top: 1rem;
    list-style: none;
    border: 2px solid var(--facebook);
    display: grid;
-   grid-template-columns: repeat(4,1fr);
+   grid-template-columns: repeat(4, 1fr);
 }
+
 li {
    width: 100px;
    height: 100px;
    color: #fff;
    background: url("https://placeimg.com/400/400/any");
+   border: 1px solid var(--facebook);
 }
+
 .start-button {
    background: var(--facebook);
    color: #fff;
