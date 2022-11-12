@@ -53,6 +53,7 @@ let TodoCheckBox = (item) => {
     })
     return checkbox
 }
+
 let TodoTask = (item) => {
     let span = document.createElement('span');
     span.setAttribute('id', `task-${item.id}`);
@@ -222,9 +223,7 @@ var currentTodo
     //Set up the currentTodo  & currentSection
     if (todos !== null) {
         currentTodo = todos.filter(todo => todo.date === getDate())[0]
-    }
-
-    if (!currentTodo) {
+    }  else  {
         currentTodo = { 'id': generateId(), 'date': getDate(), tasks: [] }
         currentSection = TodoSectionContextBox(currentTodo);
         document.body.appendChild(currentSection);
