@@ -1,5 +1,3 @@
-//default data
-let todos = [];
 // 1. Setting up the day
 const getDate = () => {
     let year = new Date().getFullYear();
@@ -69,9 +67,12 @@ let TodoTask = (item) => {
         span.addEventListener('click', () => {
             let playIcon = document.querySelector(`#grid-container-${item.id} .play-group .fa-play`);
             let pauseIcon = document.querySelector(`#grid-container-${item.id} .play-group .fa-pause`);
-            playIcon.style.display = 'block';
-            pauseIcon.style.display = 'none';
-
+            if(playIcon && pauseIcon) {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'none';
+                if(item.completed)
+                    playIcon.style.display = 'block';
+            } 
             item.completed = !(item.completed);
             todoCompleted(item);
             if (eval('count' + item.id))
@@ -90,6 +91,7 @@ const TodoDelButton = (item) => {
         i.classList.add('fa-solid', 'fa-xmark');
         i.setAttribute('id', `del-${item.id}`);
         span.style.cursor = 'pointer';
+
         span.addEventListener('click', () => {
             arrIdx = currentTodo.tasks.findIndex((x) => x.id === item.id);
             currentTodo.tasks.splice(arrIdx, 1);
@@ -185,7 +187,6 @@ const TodoFocusMode = (focusArea, item) => {
     focusArea.appendChild(timeSpan);
     focusArea.appendChild(playSpan);
     focusArea.style.display = 'inline-flex';
-
 }
 const todoCompleted = (item) => {
     if (item.completed) {
@@ -210,9 +211,6 @@ const modifyGridTemplateArea = (el) => {
     grid.style.gridTemplateAreas = "'grid-check-zone grid-time-zone grid-close-zone' 'grid-check-zone grid-content-zone grid-close-zone'"
 }
 
-
-
-
 var currentTodo
 
 (() => {
@@ -221,9 +219,11 @@ var currentTodo
     let currentSection
     let todos = JSON.parse(localStorage.getItem('todos'));
     //Set up the currentTodo  & currentSection
-    if (todos !== null) {
+    if (todos !== null) 
         currentTodo = todos.filter(todo => todo.date === getDate())[0]
-    }  else  {
+    else
+        todos = []
+    if (!currentTodo) {
         currentTodo = { 'id': generateId(), 'date': getDate(), tasks: [] }
         currentSection = TodoSectionContextBox(currentTodo);
         document.body.appendChild(currentSection);
