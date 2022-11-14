@@ -25,3 +25,5 @@
 8. Search -  created by [@mikyYun](https://github.com/mikyYun)
 9. TodoList2 - created by [@smilecana](https://github.com/smilecana)
 10. Currency Exchange -created by  [@mayfly950](https://github.com/mayfly950)
+11. Comments - created by [@mikyYun](https://github.com/mikyYun)
+12. image_game - created by [@Aleumkim] (https://github.com/Aleumkim)
